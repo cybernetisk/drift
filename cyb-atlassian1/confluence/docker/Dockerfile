@@ -15,7 +15,7 @@ RUN set -x && \
     sed -i '/confluence.prefs.watch.my.own.content/{N;s/\(.*\n.*\)true/\1false/}' preferences-default.xml && \
     xmlstarlet ed --inplace \
       --subnode /preferences -t elem -n preferenceTMP \
-      --insert //preferenceTMP -t attr -n type -v "Boolean" \
+      --insert //preferenceTMP -t attr -n type -v "String" \
       --subnode //preferenceTMP -t elem -n name -v "confluence.user.time.zone" \
       --subnode //preferenceTMP -t elem -n value -v "Europe/Oslo" \
       --rename //preferenceTMP -v "preference" \
