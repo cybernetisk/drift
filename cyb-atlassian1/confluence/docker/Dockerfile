@@ -27,6 +27,8 @@ RUN set -x && \
       --append "//Connector" -t attr -n proxyName -v confluence.cyb.no \
       --append "//Connector" -t attr -n proxyPort -v 443 \
       --update "//Context/@path" -v / \
-      "${CONF_INSTALL}/conf/server.xml"
+      "${CONF_INSTALL}/conf/server.xml" && \
+    echo 'Europe/Oslo' >/etc/timezone && \
+    dpkg-reconfigure -f noninteractive tzdata
 
 USER daemon
