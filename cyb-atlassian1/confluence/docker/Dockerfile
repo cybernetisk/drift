@@ -19,7 +19,7 @@ RUN set -x && \
       --append "//Connector" -t attr -n scheme -v https \
       --append "//Connector" -t attr -n proxyName -v confluence.cyb.no \
       --append "//Connector" -t attr -n proxyPort -v 443 \
-      --update "//Context/@path" -v /confluence \
+      --update "//Context/@path" -v / \
       "${CONF_INSTALL}/conf/server.xml"
 
 USER daemon
