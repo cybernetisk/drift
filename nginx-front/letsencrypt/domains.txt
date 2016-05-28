@@ -1,0 +1,2 @@
+jira.staging.cyb.no
+confluence.staging.cyb.no

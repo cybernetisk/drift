@@ -1,0 +1,6 @@
+#!/bin/bash
+
+CA="https://acme-staging.api.letsencrypt.org/directory"
+WELLKNOWN="/var/www/letsencrypt"
+CONTACT_EMAIL="drift@cyb.no"
+ACCOUNT_KEY="${BASEDIR}/certs/private_key.pem"
