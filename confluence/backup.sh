@@ -1,22 +1,29 @@
 #!/bin/bash
+set -e
 
 # som root
 
-data_dir=/var/lib/docker/volumes/confluence-data/_data
-cur_dir=$(pwd)
-sqlfile=confluence_db_$(date +%Y%m%d_%H%M).sql
-backupfile=confluence_backup_$(date +%Y%m%d_%H%M).tgz
+echo "Taking backup of confluence..."
+
+sqlfile=confluence_db_$(date -u +%Y%m%d_%H%M)Z.sql
+backupfile=confluence_backup_$(date -u +%Y%m%d_%H%M)Z.tgz
+dest=cyb@login.ifi.uio.no:backups/$backupfile
+backupfile=/tmp/$backupfile
+
+cd /var/lib/docker/volumes/confluence-data/_data/
 
 # eksporter database
-docker exec -it -u postgres cyb-postgres pg_dump confluencedb >$sqlfile
+docker exec -itu postgres cyb-postgres pg_dump confluence >$sqlfile
 
 # legg database, konfigurasjon og opplastede vedlegg i en pakke
-(cd "$data_dir"
- echo $(pwd)
- tar zcvf $cur_dir/$backupfile $cur_dir/$sqlfile attachments/ confluence.cfg.xml index/)
+tar zcf $backupfile $sqlfile attachments/ confluence.cfg.xml index/
+rm $sqlfile
 
 # last opp backup til cyb-brukeren på UiO
-#scp $backupfile cyb@login.ifi.uio.no:backups/
+scp -o StrictHostKeyChecking=no $backupfile $dest
+
+echo "Completed backup of confluence to $dest"
+ls -lh $backupfile
 
 # slett lokal backup
-#rm $backupfile $sqlfile
+rm $backupfile

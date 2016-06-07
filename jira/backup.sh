@@ -1,20 +1,29 @@
 #!/bin/bash
+set -e
 
 # som root
 
-cd /var/atlassian/application-data/jira
+echo "Taking backup of jira..."
 
-sqlfile=jira_db_$(date +%Y%m%d_%H%M).sql
-backupfile=jira_backup_$(date +%Y%m%d_%H%M).tgz
+sqlfile=jira_db_$(date -u +%Y%m%d_%H%M)Z.sql
+backupfile=jira_backup_$(date -u +%Y%m%d_%H%M)Z.tgz
+dest=cyb@login.ifi.uio.no:backups/$backupfile
+backupfile=/tmp/$backupfile
+
+cd /var/lib/docker/volumes/jira-data/_data/
 
 # eksporter database
-su postgres -c "pg_dump jiradb" >$sqlfile
+docker exec -itu postgres cyb-postgres pg_dump jira >$sqlfile
 
 # legg database, konfigurasjon og opplastede vedlegg i en pakke
-tar zcvf $backupfile $sqlfile data/ caches/indexes/ dbconfig.xml /opt/atlassian/jira/conf/server.xml
+tar zcf $backupfile $sqlfile data/ caches/indexes/ dbconfig.xml
+rm $sqlfile
 
 # last opp backup til cyb-brukeren på UiO
-scp $backupfile cyb@login.ifi.uio.no:backups/
+scp -o StrictHostKeyChecking=no $backupfile $dest
+
+echo "Completed backup of jira to $dest"
+ls -lh $backupfile
 
 # slett lokal backup
-rm $backupfile $sqlfile
+rm $backupfile
