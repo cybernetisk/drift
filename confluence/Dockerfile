@@ -4,6 +4,8 @@ MAINTAINER Henrik Steen <henrist@henrist.net>
 
 USER root
 
+COPY container/crowd.properties /opt/atlassian/confluence/confluence/WEB-INF/classes/crowd.properties
+
 # set autowatch to false
 #   see https://jira.atlassian.com/browse/CONF-22070
 # also set server settings to match our use
@@ -22,13 +24,14 @@ RUN set -x && \
       preferences-default.xml && \
     cp -p preferences-default.xml /opt/atlassian/confluence/confluence/WEB-INF/classes/ && \
     rm -rf /tmp/conf && \
-    xmlstarlet ed --inplace \
-      --append "//Connector" -t attr -n scheme -v https \
-      --append "//Connector" -t attr -n proxyName -v confluence.cyb.no \
-      --append "//Connector" -t attr -n proxyPort -v 443 \
-      --update "//Context/@path" -v / \
-      "${CONF_INSTALL}/conf/server.xml" && \
+    chown daemon:daemon /opt/atlassian/confluence/confluence/WEB-INF/classes/crowd.properties && \
+    chown daemon:daemon /opt/atlassian/confluence/confluence/WEB-INF/classes/seraph-config.xml && \
     echo 'Europe/Oslo' >/etc/timezone && \
     dpkg-reconfigure -f noninteractive tzdata
 
+COPY container/docker-entrypoint-cyb.sh /docker-entrypoint-cyb.sh
+
 USER daemon
+
+ENTRYPOINT ["/docker-entrypoint-cyb.sh"]
+CMD ["/opt/atlassian/confluence/bin/catalina.sh", "run"]

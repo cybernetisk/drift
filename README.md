@@ -2,4 +2,4 @@
 
 Disse mappene inneholder nødvendig driftsoppsett for tjenestene til CYB.
 
-Hovedsaklig Docker-oppsett som i dag kjører på serveren cyb-atlassian1.cyb.no.
+Ikke alle tjenestene til CYB bruker dette oppsettet. Se de ulike undermappene for detaljer.

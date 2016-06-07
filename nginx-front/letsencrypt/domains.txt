@@ -1,2 +1,6 @@
-jira.staging.cyb.no
-confluence.staging.cyb.no
+#confluence.staging.cyb.no
+#crowd.staging.cyb.no
+#jira.staging.cyb.no
+confluence.cyb.no
+crowd.cyb.no
+jira.cyb.no
