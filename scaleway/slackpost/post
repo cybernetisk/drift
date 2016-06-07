@@ -1,0 +1,10 @@
+#!/bin/bash
+
+webhook=$(<webhook)
+
+text=$*
+
+escapedText=$(echo $text | sed 's/"/\"/g' | sed "s/'/\'/g" )
+json="{\"text\": \"$escapedText\"}"
+
+curl -s -d "payload=$json" "$webhook"
