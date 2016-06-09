@@ -13,7 +13,7 @@ backupfile=/tmp/$backupfile
 cd /var/lib/docker/volumes/crowd-data/_data/
 
 # eksporter database
-docker exec -itu postgres cyb-postgres pg_dump crowd >$sqlfile
+docker exec -iu postgres cyb-postgres pg_dump crowd >$sqlfile
 
 # legg database, konfigurasjon og opplastede vedlegg i en pakke
 tar zcf $backupfile $sqlfile client.crowd.properties crowd.cfg.xml crowd.properties

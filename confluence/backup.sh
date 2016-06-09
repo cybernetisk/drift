@@ -13,7 +13,7 @@ backupfile=/tmp/$backupfile
 cd /var/lib/docker/volumes/confluence-data/_data/
 
 # eksporter database
-docker exec -itu postgres cyb-postgres pg_dump confluence >$sqlfile
+docker exec -iu postgres cyb-postgres pg_dump confluence >$sqlfile
 
 # legg database, konfigurasjon og opplastede vedlegg i en pakke
 tar zcf $backupfile $sqlfile attachments/ confluence.cfg.xml index/

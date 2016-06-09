@@ -13,7 +13,7 @@ backupfile=/tmp/$backupfile
 cd /var/lib/docker/volumes/jira-data/_data/
 
 # eksporter database
-docker exec -itu postgres cyb-postgres pg_dump jira >$sqlfile
+docker exec -iu postgres cyb-postgres pg_dump jira >$sqlfile
 
 # legg database, konfigurasjon og opplastede vedlegg i en pakke
 tar zcf $backupfile $sqlfile data/ caches/indexes/ dbconfig.xml
