@@ -33,5 +33,6 @@ for f in files:
         date = f.split("_")[2][-2:]  # Only keep the date part of the filename
         if not any(day in date for day in keepDay):
             log.write(f + '\n')
-            os.remove(f)
+            print(mypath+f)
+            os.remove(mypath + f)
 log.close()
