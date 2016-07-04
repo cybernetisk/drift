@@ -32,6 +32,6 @@ for f in files:
     if "jira" in f or "confluence" in f or "crowd" in f:
         date = f.split("_")[2][-2:]  # Only keep the date part of the filename
         if not any(day in date for day in keepDay):
-            log.write(f + '\n')
-            os.remove(f)
+            log.write(mypath + f + '\n')
+            os.remove(mypath + f)
 log.close()
