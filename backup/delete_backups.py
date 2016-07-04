@@ -6,14 +6,14 @@ import sys
 log = open('deletelog.txt', 'a')
 
 if len(sys.argv) == 1:
-    print("Usage: python2 backup.py /path/here")
-    exit(0)
+    print("Usage: python3 backup.py /path/here")
+    sys.exit()
 
 mypath = str(sys.argv[1])
 
 if not os.path.isdir(mypath):
-    print("Not a valid dir")
-    exit(0)
+    print("%s is not a valid dir" % mypath)
+    sys.exit()
 
 now = datetime.now()
 
