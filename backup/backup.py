@@ -1,9 +1,16 @@
 #!/usr/bin/env python2
 from datetime import datetime
 import os
+import sys
 
 log = open('log.txt', 'a')
-mypath = "/home/desiderius/backupscript"
+
+if len(sys.argv) == 1:
+    print "Usage: python2 backup.py /path/here"
+    exit(0)
+
+mypath = str(sys.argv[1])
+print mypath
 
 now = datetime.now()
 
