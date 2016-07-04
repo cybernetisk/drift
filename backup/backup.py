@@ -1,16 +1,19 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 from datetime import datetime
 import os
 import sys
 
-log = open('log.txt', 'a')
+log = open('deletelog.txt', 'a')
 
 if len(sys.argv) == 1:
-    print "Usage: python2 backup.py /path/here"
+    print("Usage: python2 backup.py /path/here")
     exit(0)
 
 mypath = str(sys.argv[1])
-print mypath
+
+if not os.path.isdir(mypath):
+    print("Not a valid dir")
+    exit(0)
 
 now = datetime.now()
 
