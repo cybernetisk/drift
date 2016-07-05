@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
-from datetime import datetime
+import datetime
 import os
 import sys
+
+def keepDays(now, numberOfDays):
+    days = list()
+    for i in range(0, numberOfDays):
+        days.append(str((now -datetime.timedelta(days=i)).day).zfill(2))
+    return days
 
 log = open('deletelog.txt', 'a')
 
@@ -15,13 +21,15 @@ if not os.path.isdir(mypath):
     print("%s is not a valid dir" % mypath)
     sys.exit()
 
-now = datetime.now()
+now = datetime.datetime.now()
 
-day = now.day
-month = now.month
-year = now.year
 
-keepDay = [str(date).zfill(2) for date in range(day-7, day+1) if date > 0] + ["29"]
+# Getting days to keep
+keepDay = keepDays(now, 7)
+
+#Appending the first
+keepDay.append('01')
+
 
 files = []
 for (dirpath, dirnames, filenames) in os.walk(mypath):
