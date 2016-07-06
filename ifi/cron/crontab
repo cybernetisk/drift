@@ -1,4 +1,4 @@
 MAILTO="henrste@ifi.uio.no,matsasc@ifi.uio.no"
 
 */5 * * * * ~/drift/ifi/check-dropbox.sh
-0 9 * * * ~/drift/backup/rotate-backups.sh
+0 9 * * * ~/drift/ifi/rotate-backups/rotate-backups.sh
