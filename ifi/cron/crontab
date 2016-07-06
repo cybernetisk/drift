@@ -1,4 +1,4 @@
 MAILTO="drift-intern@cyb.no"
 
-*/5 * * * * ~/drift/ifi/check-dropbox.sh 2>&1 | ~/.local/bin/slacktee.sh -u $(hostname) >/dev/null
-0 9 * * * ~/drift/ifi/rotate-backups/rotate-backups.sh 2>&1 | ~/.local/bin/slacktee.sh -u $(hostname) >/dev/null
+*/5 * * * * ~/drift/ifi/cron/log-to-slack.sh ~/drift/ifi/check-dropbox.sh
+0 9 * * * ~/drift/ifi/cron/log-to-slack.sh ~/drift/ifi/rotate-backups/rotate-backups.sh
