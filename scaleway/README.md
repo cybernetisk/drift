@@ -2,12 +2,11 @@
 
 Spesifikke filer og stæsj som kjører på scaleway-serveren vi har
 
-## Backup
+For å sette opp server på nytt:
 
 ```bash
-crontab -e
-```
-
-```
-17 4 * * * /root/drift/scaleway/backup.sh
+cd /root
+git clone git@github.com:cybrairai/drift.git
+cd /root/drift/scaleway/cron
+./crontab-load.sh
 ```
