@@ -7,4 +7,18 @@ if [ $(id -un) == "cyb" ]; then
     slacktee=~/.local/bin/slacktee.sh
 fi
 
-(eval $@ | $slacktee -u "$(hostname)" -c drift-stdout -t "$title" >/dev/null) 2>&1 | $slacktee -u "$(hostname)" -c drift-stderr -t "$title" >/dev/null
+HandleData() {
+    channel=$1
+
+    IFS='' read -r line
+    if [ -n "$line" ]; then
+        (
+            echo "$line"
+            while IFS='' read -r line; do
+                echo "$line"
+            done
+        ) | $slacktee -u "$(hostname)" -c "$channel" -t "$title" >/dev/null
+    fi
+}
+
+(eval $@ | HandleData drift-stdout) 2>&1 | HandleData drift-stderr
