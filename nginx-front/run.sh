@@ -6,5 +6,6 @@ docker run \
     --restart always \
     --name cyb-nginx-front \
     -v nginx-certs:/opt/letsencrypt.sh/certs \
+    -v internsystem-static:/var/www/internsystem-static \
     -p 80:80 -p 443:443 \
     cyb/nginx-front

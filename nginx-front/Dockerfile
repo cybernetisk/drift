@@ -14,7 +14,9 @@ COPY nginx/certs-generation.conf /etc/nginx/nginx-certs-generation.conf
 COPY nginx/confluence.conf /etc/nginx/conf.d/confluence.conf
 COPY nginx/crowd.conf /etc/nginx/conf.d/crowd.conf
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY nginx/internt.conf /etc/nginx/conf.d/internt.conf
 COPY nginx/jira.conf /etc/nginx/conf.d/jira.conf
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY letsencrypt/config /opt/letsencrypt.sh/config
 COPY letsencrypt/domains.txt /opt/letsencrypt.sh/domains.txt
 COPY supervisor/run-cert-update.sh /run-cert-update.sh
