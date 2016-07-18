@@ -12,9 +12,9 @@ CROWDPASS=$(<crowd-pass.txt)
 
 docker run \
   --name cyb-jira \
+  --net cyb \
   -d --restart=always \
   -v jira-data:/var/atlassian/jira \
-  --link cyb-postgres \
   -e "X_PROXY_NAME=jira.cyb.no" \
   -e "X_PROXY_PORT=443" \
   -e "X_PROXY_SCHEME=https" \
