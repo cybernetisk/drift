@@ -27,7 +27,6 @@ COPY src/requirements.txt /usr/src/app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src /usr/src/app
-COPY container/settings_local.py /usr/src/app/cyb_oko/settings_local.py
 COPY container/start.sh /start.sh
 COPY container/gunicorn.conf /gunicorn.conf
 

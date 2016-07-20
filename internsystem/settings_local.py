@@ -11,7 +11,7 @@ DEBUG = 'DJANGO_DEBUG' in os.environ
 # enable SAML if wanted
 # see setup_saml.sh
 ENABLE_SAML = 'DJANGO_ENABLE_SAML' in os.environ
-#SAML_FOLDER = os.path.join(BASE_DIR, 'samlauth', 'prod')
+SAML_FOLDER = os.path.join(BASE_DIR, 'samlauth', 'prod')
 
 # see https://docs.djangoproject.com/en/1.7/ref/settings/#std:setting-ALLOWED_HOSTS
 #ALLOWED_HOSTS = [
@@ -22,16 +22,16 @@ ENABLE_SAML = 'DJANGO_ENABLE_SAML' in os.environ
 STATIC_ROOT = "/usr/src/static/"
 
 # example for postgres configuration
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'django',
-#        'USER': 'django',
-#        'PASSWORD': 'edit-me',
-#        'HOST': '127.0.0.1',
-#        'PORT': '5432',
-#    }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'internsystem',
+        'USER': 'internsystem',
+        'PASSWORD': os.environ['POSTGRES_PASSWORD'],
+        'HOST': 'cyb-postgres',
+        'PORT': '5432',
+    }
+}
 
 # to log the queries in console, uncomment this
 #LOGGING = {
