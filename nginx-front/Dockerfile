@@ -15,6 +15,9 @@ COPY nginx/confluence.conf /etc/nginx/conf.d/confluence.conf
 COPY nginx/crowd.conf /etc/nginx/conf.d/crowd.conf
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY nginx/jira.conf /etc/nginx/conf.d/jira.conf
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx/okoreports.conf /etc/nginx/conf.d/okoreports.conf
+COPY nginx/okoreports.htpasswd /etc/nginx/okoreports.htpasswd
 COPY letsencrypt/config /opt/letsencrypt.sh/config
 COPY letsencrypt/domains.txt /opt/letsencrypt.sh/domains.txt
 COPY supervisor/run-cert-update.sh /run-cert-update.sh
