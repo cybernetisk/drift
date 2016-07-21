@@ -1,4 +1,5 @@
 FROM node:6
+MAINTAINER Henrik Steen <henrist@henrist.net>
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app

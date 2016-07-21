@@ -1,4 +1,5 @@
 FROM python:3-alpine
+MAINTAINER Henrik Steen <henrist@henrist.net>
 
 # postgresql-dev required to build psycopg2 with pip
 RUN apk --update add \
