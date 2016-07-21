@@ -6,3 +6,4 @@ crowd.cyb.no
 jira.cyb.no
 internt.staging.cyb.no
 in.cyb.no
+okoreports.cyb.no
