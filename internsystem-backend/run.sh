@@ -4,7 +4,7 @@ set -e
 
 . load-vars.sh
 
-running=$(docker inspect --format="{{ .State.Running }}" cyb-internsystem 2>/dev/null || true)
+running=$(docker inspect --format="{{ .State.Running }}" cyb-internsystem-backend 2>/dev/null || true)
 if [ "$running" != "" ]; then
     printf "The container already exists. Do you want to remove it? (y/n) "
     read remove
@@ -15,14 +15,14 @@ if [ "$running" != "" ]; then
     fi
 
     if [ "$running" == "true" ]; then
-        docker stop cyb-internsystem
+        docker stop cyb-internsystem-backend
     fi
 
-    docker rm cyb-internsystem
+    docker rm cyb-internsystem-backend
 fi
 
 docker run \
-  --name cyb-internsystem \
+  --name cyb-internsystem-backend \
   --net cyb \
   -d --restart=always \
   -e "DJANGO_SECRET_KEY=$SECRETKEY" \
@@ -31,4 +31,4 @@ docker run \
   -e "POSTGRES_PASSWORD=$PGPASS" \
   -v "$(pwd)/settings_local.py":/usr/src/app/cyb_oko/settings_local.py \
   -v "$(pwd)/samlauth_settings.json":/usr/src/app/samlauth/prod/settings.json \
-  cyb/internsystem
+  cyb/internsystem-backend

@@ -21,6 +21,6 @@ docker run \
   -e "POSTGRES_PASSWORD=$PGPASS" \
   -v "$(pwd)/settings_local.py":/usr/src/app/cyb_oko/settings_local.py \
   -v "$(pwd)/samlauth_settings.json":/usr/src/app/samlauth/prod/settings.json \
-  -v internsystem-static:/usr/src/static \
-  cyb/internsystem \
+  -v internsystem-backend-static:/usr/src/static \
+  cyb/internsystem-backend \
   $command

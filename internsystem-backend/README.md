@@ -5,7 +5,7 @@ in production.
 
 It runs a container with Gunicorn running the actual application.
 
-A image named `cyb/internsystem` will have all pip packages installed
+A image named `cyb/internsystem-backend` will have all pip packages installed
 alongside the actual source code. Each change to source code requires
 building a new image.
 
@@ -23,7 +23,7 @@ It will build the image, migrate database and run the container.
 You must provide secret key to Django installation and password to Postgres-database.
 The keys will be stored in plain text files in the same directory for later use.
 
-The static files are saved to the Docker-volume `internsystem-static` that
+The static files are saved to the Docker-volume `internsystem-backend-static` that
 is also mounted in the nginx-container.
 
 ## Updating

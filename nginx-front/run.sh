@@ -6,7 +6,7 @@ docker run \
     --restart always \
     --name cyb-nginx-front \
     -v internsystem-frontend-build:/var/www/internsystem-frontend-build \
-    -v internsystem-static:/var/www/internsystem-static \
+    -v internsystem-backend-static:/var/www/internsystem-static \
     -v nginx-certs:/opt/letsencrypt.sh/certs \
     -v okoreports-reports:/var/www/okoreports-reports \
     -v okoreports-frontend-dist:/var/www/okoreports-frontend-dist \

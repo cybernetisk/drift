@@ -15,12 +15,12 @@ if [ "$1" != "init" ]; then
     ./backup.sh
 fi
 
-running=$(docker inspect --format="{{ .State.Running }}" cyb-internsystem 2>/dev/null || true)
+running=$(docker inspect --format="{{ .State.Running }}" cyb-internsystem-backend 2>/dev/null || true)
 if [ "$running" != "" ]; then
     if [ "$running" == "true" ]; then
-        docker stop cyb-internsystem
+        docker stop cyb-internsystem-backend
     fi
-    docker rm cyb-internsystem
+    docker rm cyb-internsystem-backend
 fi
 
 ./shell.sh ./manage.py migrate

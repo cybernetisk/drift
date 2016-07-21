@@ -8,4 +8,4 @@ if ! [ -d src ]; then
 fi
 
 commit=$(cd src && git rev-parse --short HEAD)
-docker build -t cyb/internsystem:$commit -t cyb/internsystem:latest .
+docker build -t cyb/internsystem-backend:$commit -t cyb/internsystem-backend:latest .
