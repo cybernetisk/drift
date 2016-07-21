@@ -2,9 +2,9 @@
 
 set -e
 
-. load-vars.sh
+. .vars.sh
 
-running=$(docker inspect --format="{{ .State.Running }}" cyb-internsystem-backend 2>/dev/null || true)
+running=$(docker inspect --format="{{ .State.Running }}" $env_container_name 2>/dev/null || true)
 if [ "$running" != "" ]; then
     printf "The container already exists. Do you want to remove it? (y/n) "
     read remove
@@ -15,20 +15,21 @@ if [ "$running" != "" ]; then
     fi
 
     if [ "$running" == "true" ]; then
-        docker stop cyb-internsystem-backend
+        docker stop $env_container_name
     fi
 
-    docker rm cyb-internsystem-backend
+    docker rm $env_container_name
 fi
 
 docker run \
-  --name cyb-internsystem-backend \
+  --name $env_container_name \
   --net cyb \
   -d --restart=always \
-  -e "DJANGO_SECRET_KEY=$SECRETKEY" \
+  -e "DJANGO_SECRET_KEY=$env_secretkey" \
   -e 'DJANGO_ENABLE_SAML=1' \
-  -e 'DJANGO_DEBUG=1' \
-  -e "POSTGRES_PASSWORD=$PGPASS" \
-  -v "$(pwd)/settings_local.py":/usr/src/app/cyb_oko/settings_local.py \
-  -v "$(pwd)/samlauth_settings.json":/usr/src/app/samlauth/prod/settings.json \
-  cyb/internsystem-backend
+  -e "DJANGO_DEBUG=$env_django_debug" \
+  -e "POSTGRES_NAME=$env_pgname" \
+  -e "POSTGRES_PASSWORD=$env_pgpass" \
+  -v "$(pwd)/$env_subdir/settings_local.py":/usr/src/app/cyb_oko/settings_local.py \
+  -v "$(pwd)/$env_subdir/samlauth_settings.json":/usr/src/app/samlauth/prod/settings.json \
+  cyb/internsystem-backend:$env_image_tag

@@ -3,6 +3,6 @@
 docker run \
   -it \
   --rm \
-  -v internsystem-frontend-build:/usr/src/app-build \
-  cyb/internsystem-frontend \
+  -v $volume_dist:/usr/src/app-build \
+  cyb/internsystem-frontend:$image_tag \
   bash

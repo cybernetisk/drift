@@ -8,6 +8,8 @@
 
 set -e
 
+. .vars.sh
+
 ./update-source.sh
 ./build.sh
 
@@ -15,12 +17,12 @@ if [ "$1" != "init" ]; then
     ./backup.sh
 fi
 
-running=$(docker inspect --format="{{ .State.Running }}" cyb-internsystem-backend 2>/dev/null || true)
+running=$(docker inspect --format="{{ .State.Running }}" $env_container_name 2>/dev/null || true)
 if [ "$running" != "" ]; then
     if [ "$running" == "true" ]; then
-        docker stop cyb-internsystem-backend
+        docker stop $env_container_name
     fi
-    docker rm cyb-internsystem-backend
+    docker rm $env_container_name
 fi
 
 ./shell.sh ./manage.py migrate

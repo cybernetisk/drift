@@ -15,6 +15,8 @@ COPY nginx/confluence.conf /etc/nginx/conf.d/confluence.conf
 COPY nginx/crowd.conf /etc/nginx/conf.d/crowd.conf
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY nginx/internt.conf /etc/nginx/conf.d/internt.conf
+COPY nginx/internt-test.conf /etc/nginx/conf.d/internt-test.conf
+COPY nginx/internt-test-frontend.conf /etc/nginx/conf.d/internt-test-frontend.conf
 COPY nginx/jira.conf /etc/nginx/conf.d/jira.conf
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/okoreports.conf /etc/nginx/conf.d/okoreports.conf

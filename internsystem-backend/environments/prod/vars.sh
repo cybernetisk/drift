@@ -1,0 +1,6 @@
+env_branch=master
+env_volume_static=internsystem-backend-static
+env_image_tag=latest
+env_container_name=cyb-internsystem-backend
+env_pgname=internsystem
+env_django_debug=0

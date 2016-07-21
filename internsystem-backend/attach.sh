@@ -1,3 +1,5 @@
 #!/bin/bash
 
-docker exec -it cyb-internsystem-backend sh
+. .vars.sh
+
+docker exec -it $env_container_name sh

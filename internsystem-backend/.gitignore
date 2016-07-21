@@ -1,4 +1,4 @@
 pgpass.txt
-secret-key.txt
+secretkey.txt
 src/
 *.swp

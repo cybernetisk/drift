@@ -10,13 +10,14 @@ alongside the actual source code. Each change to source code requires
 building a new image.
 
 Environment setup is set with file overrides and environment variables
-passed to the container.
+passed to the container. The different environments are stored in the
+`environments` directory.
 
 ## Initial set up
 
 The setup can be done by running the `update.sh` script with a init parameter:
 
-`./update.sh init`
+`ENV=test ./update.sh init`
 
 It will build the image, migrate database and run the container.
 
@@ -28,4 +29,4 @@ is also mounted in the nginx-container.
 
 ## Updating
 
-`./update.sh` will take care of the needed updating. See the script for details.
+`ENV=test ./update.sh` will take care of the needed updating. See the script for details.

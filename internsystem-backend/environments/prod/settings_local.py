@@ -25,7 +25,7 @@ STATIC_ROOT = "/usr/src/static/"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'internsystem',
+        'NAME': os.environ['POSTGRES_NAME'],
         'USER': 'internsystem',
         'PASSWORD': os.environ['POSTGRES_PASSWORD'],
         'HOST': 'cyb-postgres',
