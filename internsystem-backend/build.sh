@@ -5,7 +5,7 @@ set -e
 . .vars.sh
 
 if ! [ -d src ]; then
-    echo "No source files exists, please run ./update-source.sh"
+    >&2 echo "No source files exists, please run ./update-source.sh"
     exit 1
 fi
 
