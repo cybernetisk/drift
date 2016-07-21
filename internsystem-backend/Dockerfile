@@ -7,8 +7,7 @@ RUN apk --update add \
       build-base \
       libxml2-dev \
       libxslt-dev \
-      postgresql-dev \
-      py-gunicorn
+      postgresql-dev
 
 # xmlsec is only available in the testing repo
 RUN apk add --no-cache \
