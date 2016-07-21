@@ -11,8 +11,10 @@ fi
 
 . .vars.sh
 
+interactive=$([ -t 0 ] && echo '-it' || echo '')
+
 docker run \
-  -it \
+  $interactive \
   --rm \
   --net cyb \
   -e "DJANGO_SECRET_KEY=$env_secretkey" \
