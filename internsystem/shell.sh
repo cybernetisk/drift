@@ -7,12 +7,9 @@
 command=sh
 if [ -n "$1" ]; then
     command="$@"
-fi   
+fi
 
 . load-vars.sh
-
-SECRETKEY=$(<$keyfile)
-PGPASS=$(<$pgpassfile)
 
 docker run \
   -it \

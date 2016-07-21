@@ -15,8 +15,8 @@ if [ "$1" != "init" ]; then
     ./backup.sh
 fi
 
-running=$(docker inspect --format="{{ .State.Running }}" cyb-internsystem 2>/dev/null)
-if [ $? -eq 0 ]; then
+running=$(docker inspect --format="{{ .State.Running }}" cyb-internsystem 2>/dev/null || true)
+if [ "$running" != "" ]; then
     if [ "$running" == "true" ]; then
         docker stop cyb-internsystem
     fi

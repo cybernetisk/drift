@@ -4,8 +4,8 @@ set -e
 
 . load-vars.sh
 
-running=$(docker inspect --format="{{ .State.Running }}" cyb-internsystem 2>/dev/null)
-if [ $? -eq 0 ]; then
+running=$(docker inspect --format="{{ .State.Running }}" cyb-internsystem 2>/dev/null || true)
+if [ "$running" != "" ]; then
     printf "The container already exists. Do you want to remove it? (y/n) "
     read remove
 
