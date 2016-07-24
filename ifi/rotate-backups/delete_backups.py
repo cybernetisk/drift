@@ -37,7 +37,7 @@ for (dirpath, dirnames, filenames) in os.walk(mypath):
     break
 
 for f in files:
-    if "jira" in f or "confluence" in f or "crowd" in f:
+    if "jira" in f or "confluence" in f or "crowd" in f or "internsystem" in f:
         date = f.split("_")[2][-2:]  # Only keep the date part of the filename
         if not any(day in date for day in keepDay):
             log.write(mypath + f + '\n')
