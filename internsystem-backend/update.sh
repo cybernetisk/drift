@@ -25,7 +25,7 @@ if [ "$running" != "" ]; then
     docker rm $env_container_name
 fi
 
-./shell.sh ./manage.py migrate
+./shell.sh ./manage.py migrate --noinput
 ./shell.sh ./manage.py collectstatic --noinput
 
 ./run.sh
