@@ -1,0 +1,5 @@
+*.swp
+/config/slack-api-token.txt
+/config/jira-user.txt
+/config/jira-pass.txt
+src
