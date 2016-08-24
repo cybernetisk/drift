@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -e
+
+. .vars.sh
+
 docker run \
     --name cyb-slackbot \
     --net cyb \
