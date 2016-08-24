@@ -2,6 +2,7 @@
 
 docker run \
     --name cyb-slackbot \
+    --net cyb \
     -d --restart=always \
     -e "JIRA_USER=$JIRA_USER" \
     -e "JIRA_PASS=$JIRA_PASS" \
