@@ -7,4 +7,7 @@ cd "$(dirname "$0")"
 ../crowd/backup.sh
 ../jira/backup.sh
 ../confluence/backup.sh
-../internsystem-backend/backup.sh
+
+# changing dir for internsystem
+cd ../internsystem-backend
+ENV=prod ./backup.sh
