@@ -36,10 +36,12 @@ for (dirpath, dirnames, filenames) in os.walk(mypath):
     files.extend(filenames)
     break
 
+print('Deleting files...\n')
 for f in files:
     if "jira" in f or "confluence" in f or "crowd" in f or "internsystem" in f:
         date = f.split("_")[2][-2:]  # Only keep the date part of the filename
         if not any(day in date for day in keepDay):
             log.write(mypath + f + '\n')
+            print(mypath + f + '\n')
             os.remove(mypath + f)
 log.close()
