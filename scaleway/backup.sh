@@ -11,3 +11,4 @@ cd "$(dirname "$0")"
 # changing dir for internsystem
 cd ../internsystem-backend
 ENV=prod ./backup.sh
+ENV=test ./backup.sh
