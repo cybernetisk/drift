@@ -21,3 +21,4 @@ docker run \
   -e "X_CROWD_PASSWORD=$CROWDPASS" \
   cyb/jira
 
+docker inspect -f 'created:{{.Created}}   {{.Image}}' cyb-jira >>run.log

@@ -20,3 +20,5 @@ docker run \
   -e "X_PROXY_SCHEME=https" \
   -e "X_CROWD_PASSWORD=$CROWDPASS" \
   cyb/confluence
+
+docker inspect -f 'created:{{.Created}}   {{.Image}}' cyb-confluence >>run.log
