@@ -42,7 +42,7 @@ for f in files:
         #TODO: find another way to find the date
         date = f.split("_")[2][-2:]  # Only keep the date part of the filename
         if "internsystem" in f:
-            date = f.split("_")[3][-2]
+            date = f.split("_")[4][-2]
         if not any(day in date for day in keepDay):
             log.write(mypath + f + '\n')
             print(mypath + f + '\n')
