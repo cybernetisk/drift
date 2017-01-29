@@ -2,7 +2,7 @@ version: '2'
 
 services:
   z-backend:
-    container_name: z-backend
+    container_name: cyb-z-backend
     build: src
     image: cyb/z-backend
     restart: unless-stopped
@@ -13,7 +13,7 @@ services:
       ARCHIVE_URL: https://in.cyb.no/z-backend/archive/
 
   z-backend-uglebo:
-    container_name: z-backend-uglebo
+    container_name: cyb-z-backend-uglebo
     build: src
     image: cyb/z-backend
     restart: unless-stopped
