@@ -11,4 +11,5 @@ created before starting the containers.
 - `touch uglebo/reports.json`
 
 `./update-source.sh`
+`docker-compose build`
 `docker-compose up -d`
