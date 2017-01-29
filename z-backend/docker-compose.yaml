@@ -7,8 +7,8 @@ services:
     image: cyb/z-backend
     restart: unless-stopped
     volumes:
-      - ./src/archive:/usr/src/app/archive
-      - ./src/reports.json:/usr/src/app/reports.json
+      - ./cyb/archive:/usr/src/app/archive
+      - ./cyb/reports.json:/usr/src/app/reports.json
     environment:
       ARCHIVE_URL: https://in.cyb.no/z-backend/archive/
 
