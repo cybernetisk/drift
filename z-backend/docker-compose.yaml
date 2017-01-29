@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+  z-backend:
+    container_name: z-backend
+    build: src
+    image: cyb/z-backend
+    restart: unless-stopped
+    volumes:
+      - ./src/archive:/usr/src/app/archive
+      - ./src/reports.json:/usr/src/app/reports.json
+    environment:
+      ARCHIVE_URL: https://in.cyb.no/z-backend/archive/
+
+  z-backend-uglebo:
+    container_name: z-backend-uglebo
+    build: src
+    image: cyb/z-backend
+    restart: unless-stopped
+    volumes:
+      - ./uglebo/archive:/usr/src/app/archive
+      - ./uglebo/reports.json:/usr/src/app/reports.json
+      - ./uglebo/zmal.pdf:/usr/src/app/zmal.pdf
+    environment:
+      ARCHIVE_URL: https://in.cyb.no/z-backend-uglebo/archive/
+
+networks:
+  default:
+    external:
+      name: cyb

@@ -2,10 +2,13 @@
 
 See https://github.com/cybrairai/z-backend for more details.
 
-## Set up
+## Set up and updating
 
-Run `./update.sh`
+Make sure the files `cyb/reports.json` and `uglebo/reports.json` are
+created before starting the containers.
 
-## Updating
+- `touch cyb/reports.json`
+- `touch uglebo/reports.json`
 
-Run `./update.sh`
+`./update-source.sh`
+`docker-compose up -d`
