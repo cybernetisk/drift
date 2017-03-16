@@ -16,8 +16,13 @@ RUN apt-get update && apt-get install --no-install-recommends -y curl ca-certifi
   && apt-get purge -y --auto-remove curl
 
 # grab the crowd dependencies
-RUN apt-get update && apt-get install --no-install-recommends -y \
-    openjdk-7-jdk \
+RUN echo 'deb http://httpredir.debian.org/debian jessie-backports main contrib non-free' >> /etc/apt/sources.list
+RUN echo 'deb http://ftp.no.debian.org/debian stretch main contrib non-free' >> /etc/apt/sources.list
+RUN apt-get update && apt-get install -f --no-install-recommends -y \
+    openjdk-8-jdk \
+    openjdk-8-jre \
+    openjdk-8-jdk-headless \
+    openjdk-8-jre-headless \
     libtcnative-1 \
   && rm -rf /var/lib/apt/lists/*
 
