@@ -6,10 +6,8 @@ for more details.
 `z-backend` must be used on this server as well, as it provides the database
 (`reports.json`).
 
-## Set up
+## Running the CLI
 
-Run `./update.sh`
+- `./shell.sh`
 
-## Updating
-
-Run `./update.sh`
+Run `docker-compose pull` to fetch new version.

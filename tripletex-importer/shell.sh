@@ -1,4 +1,3 @@
 #!/bin/bash
 
-cd src/tripletex-importer
-./shell.sh
+docker-compose run --rm tripletex-importer
