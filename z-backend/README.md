@@ -10,8 +10,7 @@ created before starting the containers.
 - `touch cyb/reports.json`
 - `touch uglebo/reports.json`
 
-Update sources, (re)build Docker image and start containers:
+Pull latest Docker image and start containers:
 
-- `./update-source.sh`
-- `docker-compose build`
+- `docker-compose pull`
 - `docker-compose up -d`
