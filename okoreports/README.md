@@ -11,5 +11,6 @@ details and template.
 Start the services:
 
 ```
-docker-compose up -d --pull
+docker-compose pull
+docker-compose up -d
 ```
