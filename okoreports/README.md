@@ -3,10 +3,13 @@
 See https://github.com/cybrairai/okotools/tree/master/tripletexweb for more
 details.
 
-## Set up
+## Setup and updating
 
-Run `./update.sh`
+Make sure `settings.py` is set up in this directory. See the link above for
+details and template.
 
-## Updating
+Start the services:
 
-Run `./update.sh`
+```
+docker-compose up -d --pull
+```

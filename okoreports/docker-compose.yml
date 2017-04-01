@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  cyb-okoreports-backend:
+    image: cybrairai/okoreports-backend
+    restart: unless-stopped
+    volumes:
+      - okoreports-reports-cyb:/var/okoreports/reports
+      - ./settings.py:/usr/src/tripletex/settings_local.py
+
+  cyb-okoreports-frontend:
+    image: cybrairai/okoreports-frontend
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: cyb
+
+volumes:
+  okoreports-reports-cyb:
