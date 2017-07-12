@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -f --no-install-recommends -y \
     libtcnative-1 \
   && rm -rf /var/lib/apt/lists/*
 
-ENV CROWD_VERSION 2.11.0
+ENV CROWD_VERSION 2.12.0
 ENV CROWD_HOME /var/atlassian/crowd
 
 # extract crowd
