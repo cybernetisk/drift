@@ -1,15 +1,28 @@
 # Initial roots file for SPF setup
 
-# SPBM requirements and setup
+# SPBM requirements and setu
 
-python-packages:
+spf-packages:
   pkg.latest:
     - names:
       - python34
-      - python-virtualenv
+      - postgresql
     - require_in:
       - git: spbm-staging
       - git: spbm-prod
+
+
+# Update pip and install virtualenv
+# Repo version of virtualenv is too old.
+pip-and-virtualenv:
+  cmd.run:
+    - name: |
+        pip install -U pip && pip install -U virtualenv
+    - unless: pip show virtualenv
+    - runas: root
+    - require_in:
+      - virtualenv: spbm-prod-venv
+      - virtualenv: spbm-staging-venv
 
 
 spbm-folders:
@@ -43,8 +56,9 @@ spbm-staging:
 
 
 spbm-prod-venv:
-  virtualenv_mod.managed:
+  virtualenv.managed:
     - name: /srv/venv/prod/
+    - python: python3
     - requirements: /srv/app/prod/requirements.txt
     - use_wheel: True
     - require:
@@ -52,8 +66,9 @@ spbm-prod-venv:
 
 
 spbm-staging-venv:
-  virtualenv_mod.managed:
+  virtualenv.managed:
     - name: /srv/venv/staging/
+    - python: python3
     - requirements: /srv/app/staging/requirements.txt
     - use_wheel: True
     - require:
