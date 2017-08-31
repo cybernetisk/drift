@@ -2,9 +2,13 @@
 minion-packages:
   pkg.latest:
     - names:
-      - python-pygit2
       - dnf
-      - fail2ban
+
+
+fail2ban:
+  pkg.latest: []
+  service.running:
+    - enable: True
 
 
 {% set the_states = salt['state.show_top']() %}
