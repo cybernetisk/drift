@@ -2,7 +2,7 @@ postgres:
   pkg.latest:
     - names:
       - postgresql-server
-      - postgresql-client
+      - postgresql
     - require_in:
       - postgres_user: spf-database-user
       - postgres_database: spf-database
