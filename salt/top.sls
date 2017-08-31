@@ -8,3 +8,6 @@ base:
     - spf
     - spf.database
 
+  'docker-*.cyb.no':
+    - docker
+
