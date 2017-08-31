@@ -1,7 +1,6 @@
 # Initial roots file for SPF setup
 
-# SPBM requirements and setu
-
+# SPBM requirements and setup
 spf-packages:
   pkg.latest:
     - names:
@@ -29,8 +28,10 @@ install-virtualenv:
       - virtualenv: spbm-prod-venv
       - virtualenv: spbm-staging-venv
 
-
-spbm-folders:
+spbm:
+  user.present: 
+    - require_in:
+      - file: spbm
   file.directory:
     - names:
       - /srv/app/prod/
@@ -38,11 +39,11 @@ spbm-folders:
       - /srv/venv/prod/
       - /srv/venv/staging/
     - makedirs: True
+    - user: spbm
     - force: True
     - require_in:
       - git: spbm-staging
       - git: spbm-prod
-
 
 
 spbm-prod:
