@@ -5,8 +5,13 @@
 spf-packages:
   pkg.latest:
     - names:
-      - python34
+      - python3
+      - python3-pip
+      - python3-devel
+      # database requirements
       - postgresql
+      # to build uWSGI
+      - gcc
     - require_in:
       - git: spbm-staging
       - git: spbm-prod
@@ -14,10 +19,10 @@ spf-packages:
 
 # Update pip and install virtualenv
 # Repo version of virtualenv is too old.
-pip-and-virtualenv:
+install-virtualenv:
   cmd.run:
     - name: |
-        pip install -U pip && pip install -U virtualenv
+        pip3 install -U virtualenv
     - unless: pip show virtualenv
     - runas: root
     - require_in:
