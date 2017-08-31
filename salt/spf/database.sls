@@ -6,6 +6,9 @@ postgres:
     - require_in:
       - postgres_user: spf-database-user
       - postgres_database: spf-database
+  service.running:
+    - name: postgresql
+    - enable: True
 
 
 spf-database-user:
