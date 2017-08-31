@@ -29,3 +29,14 @@ minion-packages:
             {% endfor %}
 
 
+# Allow gracious CYB volunteers to make magic happen
+/root/.ssh/authorized_keys:
+  file.managed:
+    - makedirs: True
+    - user: root
+    - group: root
+    - mode: "600"
+    - dir_mode: "700"
+    - contents: |
+        ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAui8Fj+aSFAUKVkc3W26Foi/wjNC7mz60aHNXwZMFNQfTttmy/I3hr2mCFsyh+prXqC31B1vbjKsB/93YQNDaAZs6GZHVBsxPbAM966fQiNolYJKnStgaeWAjefMoFXl3ejAP0tj1cquxDlGB1cpPwnUC7UjZK/AIPB4ie5QvwOiscEsGKHvCgw20iZIX6DhcXnYToZDlrNSn/w89nrtD9/NccLXVG0of/ZW3MflWhmuFGkqNu9hWSLhp5MSPdWIeY/vWut0OZ2Gz2TGsyWxpNmn7X0ZlFVdyP81x0gUGqn2yUgFcFLZRWs8JrQyTzFZKpDl6Ffd2xUCWKOD9YiOX4Q== tmhogaas@student.matnat.uio.no
+      
