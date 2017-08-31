@@ -8,6 +8,7 @@ base:
     - spf
     - spf.database
 
+  # Configuration for docker-machines
   'docker-*.cyb.no':
     - docker
 
