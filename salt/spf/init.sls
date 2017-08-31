@@ -40,6 +40,8 @@ spbm:
       - /srv/venv/staging/
     - makedirs: True
     - user: spbm
+    - recurse:
+      - user
     - force: True
     - require_in:
       - git: spbm-staging
