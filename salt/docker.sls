@@ -1,7 +1,7 @@
 docker-repo:
   pkgrepo.managed:
     - humanname: Docker CE Stable - $basearch
-    - baseurl: https://download.docker.com/linux/fedora/$releasever/$basearch/stable
+    - baseurl: https://download.docker.com/linux/fedora/$releasever/$basearch/test
     - gpgcheck: 1
     - gpgkey: https://download.docker.com/linux/fedora/gpg
 
