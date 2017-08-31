@@ -8,7 +8,7 @@ docker-repo:
 
 install-docker:
   pkg.latest:
-    - name:
+    - names:
       - docker-ce
       - docker-compose
   service.running:
