@@ -23,8 +23,8 @@ spf-database-user:
 spf-database:
   postgres_database.present:
     - name: {{ salt['pillar.get']('spf:db_name', 'spbm') }}
+    - owner: {{ salt['pillar.get']('spf:db_username', 'spf') }}
     - db_password: {{ salt['pillar.get']('spf:db_password') }}
     - require:
       - postgres_user: spf-database-user
-      - postgres_database: spf-database
 
