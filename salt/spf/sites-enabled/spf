@@ -1,0 +1,48 @@
+server {
+        server_name spf.cyb.no;
+
+        # Redirect all other requests
+        location /.well-known/acme-challenge {
+                default_type "text/plain";
+                alias /var/www/letsencrypt;
+        }
+
+        location / {
+                return 301 https://spf.cyb.no$request_uri;
+        }
+
+}
+
+server {
+        listen 443;
+        server_name spf.cyb.no;
+        
+        location /static {
+                alias /home/spf/src/static_files;
+        }
+
+        location /media_files {
+                alias /home/spf/src/media_files;
+
+        }
+
+        location / {
+                uwsgi_pass 127.0.0.1:8435;
+                
+                uwsgi_param Host        $host;
+                uwsgi_param X-Real-IP   $remote_addr;
+                include uwsgi_params;
+        }
+
+        ssl on;
+        ssl_certificate /opt/letsencrypt.sh/certs/spf.cyb.no/fullchain.pem;
+        ssl_certificate_key /opt/letsencrypt.sh/certs/spf.cyb.no/privkey.pem;
+
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2; 
+        ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';
+        ssl_prefer_server_ciphers on;
+        ssl_session_cache shared:SSL:10m;
+        ssl_dhparam /etc/ssl/certs/dhparam.pem;
+        
+        ssl_session_timeout 5m;
+}
