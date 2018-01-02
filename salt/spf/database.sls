@@ -1,30 +1,13 @@
-postgres:
-  pkg.latest:
-    - names:
-      - postgresql-server
-      - postgresql
-    - require_in:
-      - postgres_user: spf-database-user
-      - postgres_database: spf-database
-  service.running:
-    - name: postgresql
-    - enable: True
-    - require_in:
-      - postgres_user: spf-database-user
-      - postgres_database: spf-database
+include:
+  - postgres.server
+  - postgres.manage
 
+# Note that the pillar must be correctly configured.
 
-spf-database-user:
-  postgres_user.present:
-    - name: {{ salt['pillar.get']('spf:db_username', 'spf') }}
-    - password: {{ salt['pillar.get']('spf:db_password') }}
-    - superuser: True
-
-spf-database:
-  postgres_database.present:
-    - name: {{ salt['pillar.get']('spf:db_name', 'spbm') }}
-    - owner: {{ salt['pillar.get']('spf:db_username', 'spf') }}
-    - db_password: {{ salt['pillar.get']('spf:db_password') }}
+spf-database-setup:
+  test.nop:
     - require:
-      - postgres_user: spf-database-user
+      - sls: postgres.manage
+      - sls: postgres.server
 
+# vim: ft=sls ts=2 sts=2 sw=2 et

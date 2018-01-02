@@ -7,8 +7,6 @@ spf-packages:
       - python3
       - python3-pip
       - python3-devel
-      # database requirements
-      - postgresql
       # to build uWSGI
       - gcc
     - require_in:
