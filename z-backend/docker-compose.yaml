@@ -3,7 +3,7 @@ version: '2'
 services:
   z-backend:
     container_name: cyb-z-backend
-    image: cybrairai/z-backend
+    image: cybernetisk/z-backend
     restart: unless-stopped
     volumes:
       - ./cyb/archive:/usr/src/app/archive
@@ -13,7 +13,7 @@ services:
 
   z-backend-uglebo:
     container_name: cyb-z-backend-uglebo
-    image: cybrairai/z-backend
+    image: cybernetisk/z-backend
     restart: unless-stopped
     volumes:
       - ./uglebo/archive:/usr/src/app/archive

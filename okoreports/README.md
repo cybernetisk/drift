@@ -1,6 +1,6 @@
 # okoreports
 
-See https://github.com/cybrairai/okotools/tree/master/tripletexweb for more
+See https://github.com/cybernetisk/okotools/tree/master/tripletexweb for more
 details.
 
 ## Setup and updating

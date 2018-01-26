@@ -1,6 +1,6 @@
 # Setup of internsystem
 
-This is the Docker-setup for running https://github.com/cybrairai/internsystem
+This is the Docker-setup for running https://github.com/cybernetisk/internsystem
 in production.
 
 It runs a container with Gunicorn running the actual application.

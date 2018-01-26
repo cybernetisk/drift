@@ -1,6 +1,6 @@
 # Setup of internsystem
 
-This is the Docker-setup for running https://github.com/cybrairai/internsystem
+This is the Docker-setup for running https://github.com/cybernetisk/internsystem
 in production.
 
 The main purpose of this Docker setup is to build static files that is served

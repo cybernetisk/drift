@@ -1,6 +1,6 @@
 # z-backend
 
-See https://github.com/cybrairai/z-backend for more details.
+See https://github.com/cybernetisk/z-backend for more details.
 
 ## Set up and updating
 

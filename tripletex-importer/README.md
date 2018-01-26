@@ -1,6 +1,6 @@
 # z-backend
 
-See https://github.com/cybrairai/okotools/tree/master/tripletex-importer
+See https://github.com/cybernetisk/okotools/tree/master/tripletex-importer
 for more details.
 
 `z-backend` must be used on this server as well, as it provides the database
