@@ -8,14 +8,26 @@ services:
       - 443:443
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - cert-volume:/etc/nginx/certs:ro
+      - vhost-volume:/etc/nginx/vhost.d
+      - html-volume:/usr/share/nginx/html
     environment:
       - ENABLE_IPV6=true
+    lables: 
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+
+
+  nginx-companion:
+    iamge: jrcs/letsencrypt-nginx-proxy-companion
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - cert-volume:/etc/nginx/certs:rw
+      - vhost-volume:/etc/nginx/vhost.d
+      - html-volume:/usr/share/nginx/html
 
   confluence:
     container_name: cyb-confluence
     build: .
-    ports:
-      - 8090:8090
     expose:
       - 8090
     volumes:
@@ -24,6 +36,17 @@ services:
     environment:
       - VIRTUAL_HOST=confluence-test01.cyb.no
       - VIRTUAL_PORT=8090
+
+networks:
+  default:
+    external:
+      name: cyb
+
+volumes:
+  cert-volume:
+  vhost-volume:
+  html-volume:
+
 
 # vim: ft=yaml ts=2 sw=2 et
 
