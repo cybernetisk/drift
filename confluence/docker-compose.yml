@@ -1,6 +1,7 @@
 version: '1'
 services:
   nginx-proxy:
+    container_name: cyb-nginx
     image: jwilder/nginx-proxy
     ports:
       - 80:80
@@ -11,6 +12,7 @@ services:
       - ENABLE_IPV6=true
 
   confluence:
+    container_name: cyb-confluence
     build: .
     ports:
       - 8090:8090
