@@ -11,8 +11,9 @@ COPY container/crowd.properties /opt/atlassian/jira/atlassian-jira/WEB-INF/class
 RUN set -x && \
     chown daemon:daemon /opt/atlassian/jira/atlassian-jira/WEB-INF/classes/crowd.properties && \
     chown daemon:daemon /opt/atlassian/jira/atlassian-jira/WEB-INF/classes/seraph-config.xml && \
-    echo 'Europe/Oslo' >/etc/timezone && \
-    dpkg-reconfigure -f noninteractive tzdata
+    echo 'Europe/Oslo' >/etc/timezone
+    #Needed??
+    #dpkg-reconfigure -f noninteractive tzdata
 
 COPY container/docker-entrypoint-cyb.sh /docker-entrypoint-cyb.sh
 
