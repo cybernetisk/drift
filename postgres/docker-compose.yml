@@ -1,0 +1,8 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+# vim: ft=yaml ts=2 sw=2 et
