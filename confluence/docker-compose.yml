@@ -13,14 +13,14 @@ services:
       - html-volume:/usr/share/nginx/html
     environment:
       - ENABLE_IPV6=true
-    lables: 
+    labels:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
 
-
   nginx-companion:
-    iamge: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: nginx-letsencrypt
+    image: jrcs/letsencrypt-nginx-proxy-companion
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - cert-volume:/etc/nginx/certs:rw
       - vhost-volume:/etc/nginx/vhost.d
       - html-volume:/usr/share/nginx/html
@@ -34,8 +34,11 @@ services:
       - ~/volumes/confluence/home:/var/atlassian/confluence:rw
       - ~/volumes/confluence/logs:/opt/atlassian/confluence/logs:rw
     environment:
-      - VIRTUAL_HOST=confluence-test01.cyb.no
+      - VIRTUAL_HOST=
       - VIRTUAL_PORT=8090
+      - LETSENCRYPT_HOST=
+      - LETSENCRYPT_EMAIL=
+      - LETSENCRYPT_TEST=true
 
 networks:
   default:
@@ -49,4 +52,3 @@ volumes:
 
 
 # vim: ft=yaml ts=2 sw=2 et
-
