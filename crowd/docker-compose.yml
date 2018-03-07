@@ -1,0 +1,12 @@
+version: '3'
+services:
+  crowd:
+    container_name: cyb-crowd
+    build: .
+    volumes:
+      - ~/volumes/crowd:/var/atlassian/crowd
+    ports:
+      - 8095:8095
+    expose:
+      - 8095
+# vim: ft=yaml ts=2 sw=2 et
