@@ -13,8 +13,13 @@ services:
       - VIRTUAL_HOST=jira-test01.cyb.no
       - VIRTUAL_PORT=8080
       - LETSENCRYPT_HOST=
+      - LETSENCRYPT_PORT=8080
       - LETSENCRYPT_EMAIL=
       - LETSENCRYPT_TEST=true
       - X_CROWD_PASSWORD=$CROWDPASS
+networks:
+  default:
+    external:
+      name: cyb
 
 # vim: ft=yaml ts=2 sw=2 et

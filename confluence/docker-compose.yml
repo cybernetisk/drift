@@ -1,5 +1,20 @@
 version: '3'
 services:
+  confluence:
+    container_name: cyb-confluence
+    build: .
+    expose:
+      - 8090
+    volumes:
+      - ~/volumes/confluence/home:/var/atlassian/confluence:rw
+      - ~/volumes/confluence/logs:/opt/atlassian/confluence/logs:rw
+    environment:
+      - VIRTUAL_HOST=wiki.mrow.me
+      - VIRTUAL_PORT=8090
+      - LETSENCRYPT_HOST=wiki.mrow.me
+      - LETSENCRYPT_EMAIL=adrian@helle.me
+      - LETSENCRYPT_TEST=true
+
   nginx-proxy:
     container_name: cyb-nginx
     image: jwilder/nginx-proxy
@@ -14,10 +29,12 @@ services:
     environment:
       - ENABLE_IPV6=true
     labels:
-      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+      - 'com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true'
 
   nginx-companion:
     container_name: nginx-letsencrypt
+    depends_on:
+      - nginx-proxy
     image: jrcs/letsencrypt-nginx-proxy-companion
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -25,20 +42,6 @@ services:
       - vhost-volume:/etc/nginx/vhost.d
       - html-volume:/usr/share/nginx/html
 
-  confluence:
-    container_name: cyb-confluence
-    build: .
-    expose:
-      - 8090
-    volumes:
-      - ~/volumes/confluence/home:/var/atlassian/confluence:rw
-      - ~/volumes/confluence/logs:/opt/atlassian/confluence/logs:rw
-    environment:
-      - VIRTUAL_HOST=
-      - VIRTUAL_PORT=8090
-      - LETSENCRYPT_HOST=
-      - LETSENCRYPT_EMAIL=
-      - LETSENCRYPT_TEST=true
 
 networks:
   default:

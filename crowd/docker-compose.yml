@@ -15,8 +15,8 @@ services:
       - LETSENCRYPT_HOST=
       - LETSENCRYPT_EMAIL=
       - LETSENCRYPT_TEST=true
-    networks:
-      default:
-        external:
-          name: cyb
+networks:
+  default:
+    external:
+      name: cyb
 # vim: ft=yaml ts=2 sw=2 et
