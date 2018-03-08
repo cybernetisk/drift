@@ -12,6 +12,8 @@ services:
     environment:
       - VIRTUAL_HOST=
       - VIRTUAL_PORT=
+      - LETSENCRYPT_HOST=
+      - LETSENCRYPT_TEST=true
     networks:
       default:
         external:
