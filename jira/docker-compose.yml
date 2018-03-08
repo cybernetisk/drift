@@ -12,6 +12,9 @@ services:
     environment:
       - VIRTUAL_HOST=jira-test01.cyb.no
       - VIRTUAL_PORT=8080
+      - LETSENCRYPT_HOST=
+      - LETSENCRYPT_EMAIL=
+      - LETSENCRYPT_TEST=true
       - X_CROWD_PASSWORD=$CROWDPASS
 
 # vim: ft=yaml ts=2 sw=2 et
