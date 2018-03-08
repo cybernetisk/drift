@@ -9,4 +9,11 @@ services:
       - 8095:8095
     expose:
       - 8095
+    environment:
+      - VIRTUAL_HOST=
+      - VIRTUAL_PORT=
+    networks:
+      default:
+        external:
+          name: cyb
 # vim: ft=yaml ts=2 sw=2 et
