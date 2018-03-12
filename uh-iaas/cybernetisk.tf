@@ -156,8 +156,7 @@ resource "openstack_compute_instance_v2" "core-db" {
 # SPF-instance too
 # NOTE: Different Ignition container file
 resource "openstack_compute_instance_v2" "core-spf" {
-	count = 2
-	name = "${format("core-db%02d", count.index + 1)}"
+	name = "spf"
 	image_name = "${var.coreos}"
 	flavor_name = "${data.openstack_compute_flavor_v2.small.name}"
 	network {
