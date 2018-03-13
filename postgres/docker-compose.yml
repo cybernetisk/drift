@@ -3,6 +3,8 @@ services:
   postgres:
     container_name: cyb-postgres
     image: postgres
+    ports:
+      - 5432:5432
     volumes:
       - ~/volumes/postgres:/var/lib/postgresql/data
 
