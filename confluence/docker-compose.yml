@@ -9,10 +9,13 @@ services:
       - ~/volumes/confluence/home:/var/atlassian/confluence:rw
       - ~/volumes/confluence/logs:/opt/atlassian/confluence/logs:rw
     environment:
-      - VIRTUAL_HOST=wiki.mrow.me
+      - X_PROXY_NAME=confluence.core.cyb.no
+      - X_PROXY_PORT=443
+      - X_PROXY_SCHEME=https
+      - VIRTUAL_HOST=confluence.core.cyb.no
       - VIRTUAL_PORT=8090
-      - LETSENCRYPT_HOST=wiki.mrow.me
-      - LETSENCRYPT_EMAIL=adrian@helle.me
+      - LETSENCRYPT_HOST=confluence.core.cyb.no
+      - LETSENCRYPT_EMAIL=drift@cyb.no
       - LETSENCRYPT_TEST=true
 
   nginx-proxy:
