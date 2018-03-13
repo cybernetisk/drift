@@ -35,4 +35,4 @@ COPY container/docker-entrypoint-cyb.sh /docker-entrypoint-cyb.sh
 USER daemon
 
 ENTRYPOINT ["/docker-entrypoint-cyb.sh"]
-CMD ["/opt/atlassian/confluence/bin/catalina.sh", "run"]
+CMD ["/opt/atlassian/confluence/bin/start-confluence.sh", "-fg"]
