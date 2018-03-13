@@ -26,8 +26,9 @@ RUN set -x && \
     rm -rf /tmp/conf && \
     chown daemon:daemon /opt/atlassian/confluence/confluence/WEB-INF/classes/crowd.properties && \
     chown daemon:daemon /opt/atlassian/confluence/confluence/WEB-INF/classes/seraph-config.xml && \
-    echo 'Europe/Oslo' >/etc/timezone && \
-    dpkg-reconfigure -f noninteractive tzdata
+    echo 'Europe/Oslo' >/etc/timezone
+
+# TODO: Verify that the lack of dpkg-reconfigure isn't actually a problem 
 
 COPY container/docker-entrypoint-cyb.sh /docker-entrypoint-cyb.sh
 
