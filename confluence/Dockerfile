@@ -26,7 +26,9 @@ RUN set -x && \
     rm -rf /tmp/conf && \
     chown daemon:daemon /opt/atlassian/confluence/confluence/WEB-INF/classes/crowd.properties && \
     chown daemon:daemon /opt/atlassian/confluence/confluence/WEB-INF/classes/seraph-config.xml && \
-    echo 'Europe/Oslo' >/etc/timezone
+    echo 'Europe/Oslo' >/etc/timezone && \
+	apk update && \
+	apk add libc6-compat && \
 
 # TODO: Verify that the lack of dpkg-reconfigure isn't actually a problem 
 
