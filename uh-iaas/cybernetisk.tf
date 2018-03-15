@@ -53,6 +53,11 @@ resource "openstack_networking_secgroup_v2" "minion" {
 	description = "SSH, SaltStack, CoreOS stuff, common areas"
 }
 
+resource "openstack_networking_secgroup_v2" "db" {
+	name = "role-db"
+	description = "Database access, PostgreSQL, etc."
+}
+
 resource "openstack_networking_secgroup_rule_v2" "http" {
   direction         = "ingress"
   ethertype         = "IPv4"
@@ -71,6 +76,16 @@ resource "openstack_networking_secgroup_rule_v2" "https" {
   port_range_max    = 443
   remote_ip_prefix  = "0.0.0.0/0"
   security_group_id = "${openstack_networking_secgroup_v2.web.id}"
+}
+
+resource "openstack_networking_secgroup_rule_v2" "psql" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "tcp"
+  port_range_min    = 5432
+  port_range_max    = 5432
+  remote_group_id   = "${openstack_networking_secgroup_v2.minion.id}"
+  security_group_id = "${openstack_networking_secgroup_v2.db.id}"
 }
 
 # Temporarily disabled: multiple endpoints discovered; use variable.
@@ -146,7 +161,8 @@ resource "openstack_compute_instance_v2" "core-db" {
 		name = "${data.openstack_networking_network_v2.public.name}"
 	}
 	security_groups = [
-		"${openstack_networking_secgroup_v2.minion.name}"
+		"${openstack_networking_secgroup_v2.minion.name}",
+		"${openstack_networking_secgroup_v2.db.name}"
 	]
 	key_pair = "${openstack_compute_keypair_v2.cyb.name}"
 
