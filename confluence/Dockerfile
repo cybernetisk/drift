@@ -1,6 +1,7 @@
 FROM cptactionhank/atlassian-confluence:latest
 
-MAINTAINER Thor Høgås <thor at roht dot no>
+LABEL maintainer="Thor Høgås <thor at roht dot no>"
+LABEL version="0.3"
 
 USER root
 
