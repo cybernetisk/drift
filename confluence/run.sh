@@ -14,6 +14,7 @@ docker run \
   --name cyb-confluence \
   --net cyb \
   -d --restart=always \
+  -p 8090:8090 \
   -v confluence-data:/var/atlassian/confluence \
   -e "X_PROXY_NAME=confluence.cyb.no" \
   -e "X_PROXY_PORT=443" \

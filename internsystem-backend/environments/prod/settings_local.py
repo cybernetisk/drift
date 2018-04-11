@@ -21,6 +21,13 @@ SAML_FOLDER = os.path.join(BASE_DIR, 'samlauth', 'prod')
 # if collectstatic is used, set up this
 STATIC_ROOT = "/usr/src/static/"
 
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'calender_cache',
+    }
+}
 # example for postgres configuration
 DATABASES = {
     'default': {
