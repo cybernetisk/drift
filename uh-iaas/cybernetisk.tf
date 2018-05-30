@@ -99,116 +99,118 @@ resource "openstack_networking_secgroup_rule_v2" "psql" {
 	security_group_id = "${openstack_networking_secgroup_v2.db.id}"
 }
 
+/*
 # Temporarily disabled: multiple endpoints discovered; use variable.
-#resource "openstack_images_image_v2" "coreos" {
-	#	name = "Container-Linux"
-	#	disk_format = "qcow2"
-	#	container_format = "bare"
-	#	local_file_path = "coreos_production_openstack_image.img"
-	#	region = "osl"
-	#}
+resource "openstack_images_image_v2" "coreos" {
+	name = "Container-Linux"
+	disk_format = "qcow2"
+	container_format = "bare"
+	local_file_path = "coreos_production_openstack_image.img"
+	region = "osl"
+}
+*/
 
-	/*
-	All compute resources for CYB
-	*/
-	# Create application server for Confluence
-	resource "openstack_compute_instance_v2" "first-confluence" {
-		name = "core-confluence"
-		image_name = "${var.coreos}"
-		flavor_name = "${data.openstack_compute_flavor_v2.large.name}"
-		network {
-			name = "${data.openstack_networking_network_v2.public.name}"
-		}
-		security_groups = [
-			"${openstack_networking_secgroup_v2.web.name}",
-			"${openstack_networking_secgroup_v2.minion.name}"
-		]
-		key_pair = "${openstack_compute_keypair_v2.cyb.name}"
-
-		user_data = "${file("coreos/cyb.ign")}"
+/*
+All compute resources for CYB
+*/
+# Create application server for Confluence
+resource "openstack_compute_instance_v2" "first-confluence" {
+	name = "core-confluence"
+	image_name = "${var.coreos}"
+	flavor_name = "${data.openstack_compute_flavor_v2.large.name}"
+	network {
+		name = "${data.openstack_networking_network_v2.public.name}"
 	}
+	security_groups = [
+		"${openstack_networking_secgroup_v2.web.name}",
+		"${openstack_networking_secgroup_v2.minion.name}"
+	]
+	key_pair = "${openstack_compute_keypair_v2.cyb.name}"
 
-	# Create application server for Jira
-	resource "openstack_compute_instance_v2" "first-jira" {
-		name = "core-jira"
-		image_name = "${var.coreos}"
-		flavor_name = "${data.openstack_compute_flavor_v2.medium.name}"
-		network {
-			name = "${data.openstack_networking_network_v2.public.name}"
-		}
-		security_groups = [
-			"${openstack_networking_secgroup_v2.web.name}",
-			"${openstack_networking_secgroup_v2.minion.name}"
-		]
-		key_pair = "${openstack_compute_keypair_v2.cyb.name}"
+	user_data = "${file("coreos/cyb.ign")}"
+}
 
-		user_data = "${file("coreos/cyb.ign")}"
+# Create application server for Jira
+resource "openstack_compute_instance_v2" "first-jira" {
+	name = "core-jira"
+	image_name = "${var.coreos}"
+	flavor_name = "${data.openstack_compute_flavor_v2.medium.name}"
+	network {
+		name = "${data.openstack_networking_network_v2.public.name}"
 	}
+	security_groups = [
+		"${openstack_networking_secgroup_v2.web.name}",
+		"${openstack_networking_secgroup_v2.minion.name}"
+	]
+	key_pair = "${openstack_compute_keypair_v2.cyb.name}"
 
-	# Create application server for Crowd
-	resource "openstack_compute_instance_v2" "first-crowd" {
-		name = "core-crowd"
-		image_name = "${var.coreos}"
-		flavor_name = "${data.openstack_compute_flavor_v2.small.name}"
-		network {
-			name = "${data.openstack_networking_network_v2.public.name}"
-		}
-		security_groups = [
-			"${openstack_networking_secgroup_v2.web.name}",
-			"${openstack_networking_secgroup_v2.minion.name}"
-		]
-		key_pair = "${openstack_compute_keypair_v2.cyb.name}"
+	user_data = "${file("coreos/cyb.ign")}"
+}
 
-		user_data = "${file("coreos/cyb.ign")}"
+# Create application server for Crowd
+resource "openstack_compute_instance_v2" "first-crowd" {
+	name = "core-crowd"
+	image_name = "${var.coreos}"
+	flavor_name = "${data.openstack_compute_flavor_v2.small.name}"
+	network {
+		name = "${data.openstack_networking_network_v2.public.name}"
 	}
+	security_groups = [
+		"${openstack_networking_secgroup_v2.web.name}",
+		"${openstack_networking_secgroup_v2.minion.name}"
+	]
+	key_pair = "${openstack_compute_keypair_v2.cyb.name}"
 
-	# Create some database servers; we'll need too, and not much memory either
-	resource "openstack_compute_instance_v2" "core-db" {
-		count = 2
-		name = "${format("core-db%02d", count.index + 1)}"
-		image_name = "${var.coreos}"
-		flavor_name = "${data.openstack_compute_flavor_v2.small.name}"
-		network {
-			name = "${data.openstack_networking_network_v2.public.name}"
-		}
-		security_groups = [
-			"${openstack_networking_secgroup_v2.minion.name}",
-			"${openstack_networking_secgroup_v2.db.name}"
-		]
-		key_pair = "${openstack_compute_keypair_v2.cyb.name}"
+	user_data = "${file("coreos/cyb.ign")}"
+}
 
-		user_data = "${file("coreos/cyb.ign")}"
+# Create some database servers; we'll need too, and not much memory either
+resource "openstack_compute_instance_v2" "core-db" {
+	count = 2
+	name = "${format("core-db%02d", count.index + 1)}"
+	image_name = "${var.coreos}"
+	flavor_name = "${data.openstack_compute_flavor_v2.small.name}"
+	network {
+		name = "${data.openstack_networking_network_v2.public.name}"
 	}
+	security_groups = [
+		"${openstack_networking_secgroup_v2.minion.name}",
+		"${openstack_networking_secgroup_v2.db.name}"
+	]
+	key_pair = "${openstack_compute_keypair_v2.cyb.name}"
 
-	# SPF-instance too
-	# NOTE: Different Ignition container file
-	resource "openstack_compute_instance_v2" "core-spf" {
-		name = "spf"
-		image_name = "${var.coreos}"
-		flavor_name = "${data.openstack_compute_flavor_v2.small.name}"
-		network {
-			name = "${data.openstack_networking_network_v2.public.name}"
-		}
-		security_groups = [
-			"${openstack_networking_secgroup_v2.minion.name}"
-		]
-		key_pair = "${openstack_compute_keypair_v2.cyb.name}"
+	user_data = "${file("coreos/cyb.ign")}"
+}
 
-		user_data = "${file("coreos/spf.ign")}"
+# SPF-instance too
+# NOTE: Different Ignition container file
+resource "openstack_compute_instance_v2" "core-spf" {
+	name = "spf"
+	image_name = "${var.coreos}"
+	flavor_name = "${data.openstack_compute_flavor_v2.small.name}"
+	network {
+		name = "${data.openstack_networking_network_v2.public.name}"
 	}
+	security_groups = [
+		"${openstack_networking_secgroup_v2.minion.name}"
+	]
+	key_pair = "${openstack_compute_keypair_v2.cyb.name}"
 
-	/*
-	Outputs for magic
-	*/
-	output "confluence_ip" {
-		value = "${openstack_compute_instance_v2.first-confluence.access_ip_v4}"
-	}
-	output "jira_ip" {
-		value = "${openstack_compute_instance_v2.first-jira.access_ip_v4}"
-	}
-	output "crowd_ip" {
-		value = "${openstack_compute_instance_v2.first-crowd.access_ip_v4}"
-	}
-	output "db_ips" {
-		value = ["${openstack_compute_instance_v2.core-db.*.access_ip_v4}"]
-	}
+	user_data = "${file("coreos/spf.ign")}"
+}
+
+/*
+Outputs for magic
+*/
+output "confluence_ip" {
+	value = "${openstack_compute_instance_v2.first-confluence.access_ip_v4}"
+}
+output "jira_ip" {
+	value = "${openstack_compute_instance_v2.first-jira.access_ip_v4}"
+}
+output "crowd_ip" {
+	value = "${openstack_compute_instance_v2.first-crowd.access_ip_v4}"
+}
+output "db_ips" {
+	value = ["${openstack_compute_instance_v2.core-db.*.access_ip_v4}"]
+}
