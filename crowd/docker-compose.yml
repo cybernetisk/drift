@@ -12,14 +12,14 @@ services:
       - 8095
     environment:
       - "CROWD_URL=http://localhost:8095"
-      - CROWD_PROXY_NAME=crowd-test.cyb.no
+      - CROWD_PROXY_NAME=crowd.core.cyb.no
       - CROWD_PROXY_PORT=443
       - CROWD_PROXY_SCHEME=https
       - CROWD_CONTEXT=ROOT
       - SPLASH_CONTEXT=
-      - VIRTUAL_HOST=crowd-test.cyb.no
+      - VIRTUAL_HOST=crowd.core.cyb.no
       - VIRTUAL_PORT=8095
-      - LETSENCRYPT_HOST=crowd-test.cyb.no
+      - LETSENCRYPT_HOST=crowd.core.cyb.no
       - LETSENCRYPT_EMAIL=x@cyb.no
 
   nginx-proxy:
