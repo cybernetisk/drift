@@ -189,10 +189,23 @@ resource "openstack_networking_secgroup_rule_v2" "psql" {
 	/*
 	Outputs for magic
 	*/
-	output "public_ips" {
+	output "confluence_ip" {
 		value = {
 			"confluence" = "${openstack_compute_instance_v2.first-confluence.access_ip_v4}"
+		}
+	}
+	output "jira_ip" {
+		value = {
 			"jira" = "${openstack_compute_instance_v2.first-jira.access_ip_v4}"
+		}
+	}
+	output "crowd_ip" {
+		value = {
 			"crowd" = "${openstack_compute_instance_v2.first-crowd.access_ip_v4}"
+		}
+	}
+	output "db_ips" {
+		value = {
+			"db" = ["${openstack_compute_instance_v2.core-db.*.access_ip_v4}"]
 		}
 	}
