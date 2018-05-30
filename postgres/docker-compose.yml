@@ -3,12 +3,12 @@ services:
   postgres:
     # Note that https://confluence.atlassian.com/doc/supported-platforms-207488198.html 
     # Confluence only supports versions <= 9.6 and >= 9.3
-    container_name: cyb-postgres
+    container_name: postgres
     image: postgres:9
     ports:
       - 5432:5432
     volumes:
-      - ~/volumes/postgres:/var/lib/postgresql/data
+      - /srv/volumes/postgres:/var/lib/postgresql/data
 
 networks:
   default:
