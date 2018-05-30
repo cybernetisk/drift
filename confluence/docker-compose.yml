@@ -6,8 +6,8 @@ services:
     expose:
       - 8090
     volumes:
-      - ~/volumes/confluence/home:/var/atlassian/confluence:rw
-      - ~/volumes/confluence/logs:/opt/atlassian/confluence/logs:rw
+      - /srv/volumes/confluence/home:/var/atlassian/confluence:rw
+      - /srv/volumes/confluence/logs:/opt/atlassian/confluence/logs:rw
     environment:
       - X_PROXY_NAME=confluence.core.cyb.no
       - X_PROXY_PORT=443

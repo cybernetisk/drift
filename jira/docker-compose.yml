@@ -8,18 +8,52 @@ services:
     expose:
       - 8080
     volumes:
-      - ~/volumes/jira:/var/atlassian/jira
+      - /srv/volumes/jira:/var/atlassian/jira
     environment:
-      - VIRTUAL_HOST=jira-test01.cyb.no
+      - VIRTUAL_HOST=jira-test.cyb.no
       - VIRTUAL_PORT=8080
-      - LETSENCRYPT_HOST=
+      - LETSENCRYPT_HOST=jira-test.cyb.no
       - LETSENCRYPT_PORT=8080
-      - LETSENCRYPT_EMAIL=
+      - LETSENCRYPT_EMAIL=x@cyb.no
       - LETSENCRYPT_TEST=true
       - X_CROWD_PASSWORD=$CROWDPASS
+
+  nginx-proxy:
+    container_name: cyb-nginx
+    image: jwilder/nginx-proxy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - cert-volume:/etc/nginx/certs:ro
+      - vhost-volume:/etc/nginx/vhost.d
+      - html-volume:/usr/share/nginx/html
+    environment:
+      - ENABLE_IPV6=true
+    labels:
+      - 'com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true'
+
+  nginx-companion:
+    container_name: nginx-letsencrypt
+    depends_on:
+      - nginx-proxy
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - cert-volume:/etc/nginx/certs:rw
+      - vhost-volume:/etc/nginx/vhost.d
+      - html-volume:/usr/share/nginx/html
+
 networks:
   default:
     external:
       name: cyb
+
+volumes:
+  cert-volume:
+  vhost-volume:
+  html-volume:
+
 
 # vim: ft=yaml ts=2 sw=2 et

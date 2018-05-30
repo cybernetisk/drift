@@ -169,7 +169,7 @@ resource "openstack_compute_instance_v2" "core-db" {
 	count = 2
 	name = "${format("core-db%02d", count.index + 1)}"
 	image_name = "${var.coreos}"
-	flavor_name = "${data.openstack_compute_flavor_v2.small.name}"
+	flavor_name = "${data.openstack_compute_flavor_v2.medium.name}"
 	network {
 		name = "${data.openstack_networking_network_v2.public.name}"
 	}

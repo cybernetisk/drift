@@ -4,19 +4,58 @@ services:
     container_name: cyb-crowd
     build: .
     volumes:
-      - ~/volumes/crowd:/var/atlassian/crowd
+      - /srv/volumes/crowd:/var/atlassian/crowd
     ports:
       - 8095:8095
     expose:
       - 8095
     environment:
-      - VIRTUAL_HOST=
-      - VIRTUAL_PORT=
-      - LETSENCRYPT_HOST=
-      - LETSENCRYPT_EMAIL=
+      - X_PROXY_NAME=crowd-test.cyb.no
+      - X_PROXY_PORT=443
+      - X_PROXY_SCHEME=https
+      - VIRTUAL_HOST=crowd-test.cyb.no
+      - VIRTUAL_PORT=8095
+      - LETSENCRYPT_HOST=crowd-test.cyb.no
+      - LETSENCRYPT_EMAIL=x@cyb.no
       - LETSENCRYPT_TEST=true
+
+  nginx-proxy:
+    container_name: cyb-nginx
+    image: jwilder/nginx-proxy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - cert-volume:/etc/nginx/certs:ro
+      - vhost-volume:/etc/nginx/vhost.d
+      - html-volume:/usr/share/nginx/html
+    environment:
+      - ENABLE_IPV6=true
+    labels:
+      - 'com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true'
+
+  nginx-companion:
+    container_name: nginx-letsencrypt
+    depends_on:
+      - nginx-proxy
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - cert-volume:/etc/nginx/certs:rw
+      - vhost-volume:/etc/nginx/vhost.d
+      - html-volume:/usr/share/nginx/html
+
+
 networks:
   default:
     external:
       name: cyb
+
+volumes:
+  cert-volume:
+  vhost-volume:
+  html-volume:
+
+
 # vim: ft=yaml ts=2 sw=2 et
