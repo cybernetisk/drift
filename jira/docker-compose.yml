@@ -10,9 +10,9 @@ services:
     volumes:
       - /srv/volumes/jira:/var/atlassian/jira
     environment:
-      - VIRTUAL_HOST=jira.core.cyb.no
+      - VIRTUAL_HOST=jira.cyb.no
       - VIRTUAL_PORT=8080
-      - LETSENCRYPT_HOST=jira.core.cyb.no
+      - LETSENCRYPT_HOST=jira.cyb.no
       - LETSENCRYPT_PORT=8080
       - LETSENCRYPT_EMAIL=x@cyb.no
       - LETSENCRYPT_TEST=true
