@@ -15,7 +15,6 @@ services:
       - LETSENCRYPT_HOST=jira.cyb.no
       - LETSENCRYPT_PORT=8080
       - LETSENCRYPT_EMAIL=x@cyb.no
-      - LETSENCRYPT_TEST=true
       - X_CROWD_PASSWORD=$CROWDPASS
 
   nginx-proxy:
