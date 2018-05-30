@@ -1,26 +1,29 @@
 version: '3'
 services:
   crowd:
-    container_name: cyb-crowd
-    build: .
+    container_name: crowd
+    image: blacklabelops/crowd
     volumes:
       - /srv/volumes/crowd:/var/atlassian/crowd
+      - /dev/urandom:/dev/random
     ports:
       - 8095:8095
     expose:
       - 8095
     environment:
-      - X_PROXY_NAME=crowd-test.cyb.no
-      - X_PROXY_PORT=443
-      - X_PROXY_SCHEME=https
+      - "CROWD_URL=http://localhost:8095"
+      - CROWD_PROXY_NAME=crowd-test.cyb.no
+      - CROWD_PROXY_PORT=443
+      - CROWD_PROXY_SCHEME=https
+      - CROWD_CONTEXT=ROOT
+      - SPLASH_CONTEXT=
       - VIRTUAL_HOST=crowd-test.cyb.no
       - VIRTUAL_PORT=8095
       - LETSENCRYPT_HOST=crowd-test.cyb.no
       - LETSENCRYPT_EMAIL=x@cyb.no
-      - LETSENCRYPT_TEST=true
 
   nginx-proxy:
-    container_name: cyb-nginx
+    container_name: nginx
     image: jwilder/nginx-proxy
     ports:
       - 80:80
@@ -46,16 +49,14 @@ services:
       - vhost-volume:/etc/nginx/vhost.d
       - html-volume:/usr/share/nginx/html
 
-
 networks:
   default:
     external:
-      name: cyb
+      name: crowd
 
 volumes:
   cert-volume:
   vhost-volume:
   html-volume:
-
 
 # vim: ft=yaml ts=2 sw=2 et
