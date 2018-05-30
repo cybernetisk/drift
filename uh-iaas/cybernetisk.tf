@@ -78,7 +78,6 @@ resource "openstack_networking_secgroup_rule_v2" "ssh" {
 	security_group_id = "${openstack_networking_secgroup_v2.minion.id}"
 }
 
-
 resource "openstack_networking_secgroup_rule_v2" "https" {
 	direction         = "ingress"
 	ethertype         = "IPv4"
