@@ -15,7 +15,7 @@ etcd:
   listen_peer_urls:            "http://{PRIVATE_IPV4}:2380"
   # generate a new token for each unique cluster from https://discovery.etcd.io/new?size=3
   # specify the initial size of your cluster with ?size=X
-  discovery:                   "https://discovery.etcd.io/19721f9357b0f4419b19f86b182f0ab6"
+  discovery:                   "https://discovery.etcd.io/3441ea5dc3336d14fdce6154fa8d8979"
 passwd:
   users:
     - name: core
