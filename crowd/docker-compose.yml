@@ -21,6 +21,7 @@ services:
       - VIRTUAL_PORT=8095
       - LETSENCRYPT_HOST=crowd.core.cyb.no
       - LETSENCRYPT_EMAIL=x@cyb.no
+      - LETSENCRYPT_TEST=true
 
   nginx-proxy:
     container_name: nginx
