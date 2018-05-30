@@ -1,7 +1,7 @@
 version: '3'
 services:
   jira:
-    container_name: cyb-jira
+    container_name: jira
     build: .
     ports:
       - 8080:8080
@@ -19,7 +19,7 @@ services:
       - X_CROWD_PASSWORD=$CROWDPASS
 
   nginx-proxy:
-    container_name: cyb-nginx
+    container_name: nginx
     image: jwilder/nginx-proxy
     ports:
       - 80:80

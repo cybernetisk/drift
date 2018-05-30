@@ -1,7 +1,7 @@
 version: '3'
 services:
   confluence:
-    container_name: cyb-confluence
+    container_name: confluence
     build: .
     expose:
       - 8090
@@ -19,7 +19,7 @@ services:
       - LETSENCRYPT_TEST=true
 
   nginx-proxy:
-    container_name: cyb-nginx
+    container_name: nginx
     image: jwilder/nginx-proxy
     ports:
       - 80:80
