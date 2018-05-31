@@ -29,6 +29,7 @@ services:
       - cert-volume:/etc/nginx/certs:ro
       - vhost-volume:/etc/nginx/vhost.d
       - html-volume:/usr/share/nginx/html
+      - nginx/conf.d/attachment_size.conf:/etc/nginx/conf.d/attachment_size.conf
     environment:
       - ENABLE_IPV6=true
     labels:
