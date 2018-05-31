@@ -10,12 +10,14 @@ services:
     volumes:
       - /srv/volumes/jira:/var/atlassian/jira
     environment:
+      - X_PROXY_NAME=jira.cyb.no
+      - X_PROXY_PORT=443
+      - X_PROXY_SCHEME=https
       - VIRTUAL_HOST=jira.cyb.no
       - VIRTUAL_PORT=8080
       - LETSENCRYPT_HOST=jira.cyb.no
       - LETSENCRYPT_PORT=8080
       - LETSENCRYPT_EMAIL=x@cyb.no
-      - X_CROWD_PASSWORD=$CROWDPASS
 
   nginx-proxy:
     container_name: nginx

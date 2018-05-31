@@ -1,6 +1,6 @@
 FROM cptactionhank/atlassian-jira-software:latest
 
-MAINTAINER Henrik Steen <henrist@henrist.net>
+MAINTAINER X-gruppa <x@cyb.no>
 
 USER root
 
@@ -12,12 +12,10 @@ RUN set -x && \
     chown daemon:daemon /opt/atlassian/jira/atlassian-jira/WEB-INF/classes/crowd.properties && \
     chown daemon:daemon /opt/atlassian/jira/atlassian-jira/WEB-INF/classes/seraph-config.xml && \
     echo 'Europe/Oslo' >/etc/timezone
-    #Needed??
-    #dpkg-reconfigure -f noninteractive tzdata
 
 COPY container/docker-entrypoint-cyb.sh /docker-entrypoint-cyb.sh
 
 USER daemon
 
 ENTRYPOINT ["/docker-entrypoint-cyb.sh"]
-CMD ["/opt/atlassian/jira/bin/catalina.sh", "run"]
+CMD ["/opt/atlassian/jira/bin/start-jira.sh", "-fg"]
