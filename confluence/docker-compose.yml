@@ -16,7 +16,6 @@ services:
       - VIRTUAL_PORT=8090
       - LETSENCRYPT_HOST=wiki.cyb.no
       - LETSENCRYPT_EMAIL=drift@cyb.no
-      - LETSENCRYPT_TEST=true
 
   nginx-proxy:
     container_name: nginx
