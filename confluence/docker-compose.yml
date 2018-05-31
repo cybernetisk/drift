@@ -56,6 +56,7 @@ volumes:
   cert-volume:
   vhost-volume:
   html-volume:
+  nginx/conf.d/attachment_size.conf:
 
 
 # vim: ft=yaml ts=2 sw=2 et
