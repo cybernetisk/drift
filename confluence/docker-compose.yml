@@ -29,7 +29,7 @@ services:
       - cert-volume:/etc/nginx/certs:ro
       - vhost-volume:/etc/nginx/vhost.d
       - html-volume:/usr/share/nginx/html
-      - nginx/conf.d/attachment_size.conf:/etc/nginx/conf.d/attachment_size.conf
+      - ${PWD}/nginx/conf.d/attachment_size.conf:/etc/nginx/conf.d/attachment_size.conf
     environment:
       - ENABLE_IPV6=true
     labels:
@@ -56,7 +56,7 @@ volumes:
   cert-volume:
   vhost-volume:
   html-volume:
-  nginx/conf.d/attachment_size.conf:
+  nginx:
 
 
 # vim: ft=yaml ts=2 sw=2 et
