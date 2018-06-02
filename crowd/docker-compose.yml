@@ -8,6 +8,7 @@ services:
       - /dev/urandom:/dev/random
     ports:
       - 8095:8095
+    restart: always
     expose:
       - 8095
     environment:
@@ -28,6 +29,7 @@ services:
     ports:
       - 80:80
       - 443:443
+    restart: always
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - cert-volume:/etc/nginx/certs:ro
@@ -42,6 +44,7 @@ services:
     container_name: nginx-letsencrypt
     depends_on:
       - nginx-proxy
+    restart: always
     image: jrcs/letsencrypt-nginx-proxy-companion
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro

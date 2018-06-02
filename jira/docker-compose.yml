@@ -7,6 +7,7 @@ services:
       - 8080:8080
     expose:
       - 8080
+    restart: always
     volumes:
       - /srv/volumes/jira:/var/atlassian/jira
     environment:
@@ -25,6 +26,7 @@ services:
     ports:
       - 80:80
       - 443:443
+    restart: always
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - cert-volume:/etc/nginx/certs:ro
@@ -39,6 +41,7 @@ services:
     container_name: nginx-letsencrypt
     depends_on:
       - nginx-proxy
+    restart: always
     image: jrcs/letsencrypt-nginx-proxy-companion
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro

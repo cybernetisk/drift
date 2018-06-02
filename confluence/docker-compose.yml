@@ -5,6 +5,7 @@ services:
     build: .
     expose:
       - 8090
+    restart: always
     volumes:
       - /srv/volumes/confluence/home:/var/atlassian/confluence:rw
       - /srv/volumes/confluence/logs:/opt/atlassian/confluence/logs:rw
@@ -23,6 +24,7 @@ services:
     ports:
       - 80:80
       - 443:443
+    restart: always
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - cert-volume:/etc/nginx/certs:ro
@@ -38,6 +40,7 @@ services:
     container_name: nginx-letsencrypt
     depends_on:
       - nginx-proxy
+    restart: always
     image: jrcs/letsencrypt-nginx-proxy-companion
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
