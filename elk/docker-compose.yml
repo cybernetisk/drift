@@ -32,8 +32,11 @@ services:
       - ENABLE_IPV6=true
     labels:
       - 'com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true'
-    links:
-      - elk_elk_1
+    log_driver: "gelf"
+    log_opt:
+    gelf-address: "udp://elk_elk_1:5044"
+    gelf-tag: "nginx-letsencrypt"
+
 
   nginx-companion:
     container_name: nginx-letsencrypt
@@ -46,8 +49,10 @@ services:
       - cert-volume:/etc/nginx/certs:rw
       - vhost-volume:/etc/nginx/vhost.d
       - html-volume:/usr/share/nginx/html
-    links:
-      - elk
+    log_driver: "gelf"
+    log_opt:
+    gelf-address: "udp://elk_elk_1:5044"
+    gelf-tag: "nginx-letsencrypt"
 
 
 networks:
