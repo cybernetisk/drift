@@ -198,6 +198,23 @@ resource "openstack_compute_instance_v2" "core-spf" {
 	user_data = "${file("coreos/spf.ign")}"
 }
 
+# Create instance for ELK
+resource "openstack_compute_instance_v2" "core-elk" {
+	name = "core-elk"
+	image_name = "${var.coreos}"
+	flavor_name = "${data.openstack_compute_flavor_v2.large.name}"
+	network {
+		name = "${data.openstack_networking_network_v2.public.name}"
+	}
+	security_groups = [
+		"${openstack_networking_secgroup_v2.web.name}",
+		"${openstack_networking_secgroup_v2.minion.name}"
+	]
+	key_pair = "${openstack_compute_keypair_v2.cyb.name}"
+
+	user_data = "${file("coreos/cyb.ign")}"
+}
+
 /*
 Outputs for magic
 */
@@ -210,6 +227,10 @@ output "jira_ip" {
 output "crowd_ip" {
 	value = "${openstack_compute_instance_v2.first-crowd.access_ip_v4}"
 }
+output "elk_ip" {
+	value = "${openstack_compute_instance_v2.core-elk.*.access_ip_v4}"
+}
 output "db_ips" {
 	value = ["${openstack_compute_instance_v2.core-db.*.access_ip_v4}"]
 }
+

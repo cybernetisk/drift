@@ -1,0 +1,62 @@
+version: '3'
+services:
+  elk:
+    image: sebp/elk
+    ports:
+      - "5601:5601"
+      - "9200:9200"
+      - "5044:5044"
+    environment:
+      - X_PROXY_NAME=log.cyb.no
+      - X_PROXY_PORT=443
+      - X_PROXY_SCHEME=https
+      - VIRTUAL_HOST=log.cyb.no
+      - VIRTUAL_PORT=5601
+      - LETSENCRYPT_HOST=log.cyb.no
+      - LETSENCRYPT_EMAIL=drift@cyb.no
+      - LETSENCRYPT_TEST=true 
+
+  nginx-proxy:
+    container_name: nginx
+    image: jwilder/nginx-proxy
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - cert-volume:/etc/nginx/certs:ro
+      - vhost-volume:/etc/nginx/vhost.d
+      - html-volume:/usr/share/nginx/html
+      - ${PWD}/nginx/conf.d/attachment_size.conf:/etc/nginx/conf.d/attachment_size.conf
+    environment:
+      - ENABLE_IPV6=true
+    labels:
+      - 'com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true'
+
+  nginx-companion:
+    container_name: nginx-letsencrypt
+    depends_on:
+      - nginx-proxy
+    restart: always
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - cert-volume:/etc/nginx/certs:rw
+      - vhost-volume:/etc/nginx/vhost.d
+      - html-volume:/usr/share/nginx/html
+
+
+networks:
+  default:
+    external:
+      name: cyb
+
+volumes:
+  cert-volume:
+  vhost-volume:
+  html-volume:
+  nginx:
+
+
+# vim: ft=yaml ts=2 sw=2 et
