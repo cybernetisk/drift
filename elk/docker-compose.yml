@@ -32,10 +32,6 @@ services:
       - ENABLE_IPV6=true
     labels:
       - 'com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true'
-    log_driver: "gelf"
-    log_opt:
-    gelf-address: "udp://elk_elk_1:5044"
-    gelf-tag: "nginx-letsencrypt"
 
 
   nginx-companion:
@@ -49,10 +45,16 @@ services:
       - cert-volume:/etc/nginx/certs:rw
       - vhost-volume:/etc/nginx/vhost.d
       - html-volume:/usr/share/nginx/html
-    log_driver: "gelf"
-    log_opt:
-    gelf-address: "udp://elk_elk_1:5044"
-    gelf-tag: "nginx-letsencrypt"
+
+filebeat:
+  image: bargenson/filebeat
+  restart: unless-stopped
+  volumes:
+   - /var/run/docker.sock:/tmp/docker.sock
+  environment:
+   - LOGSTASH_HOST=elk
+   - LOGSTASH_PORT=5044
+   - SHIPPER_NAME=adriah
 
 
 networks:
