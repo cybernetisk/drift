@@ -6,6 +6,11 @@ services:
     expose:
       - 8090
     restart: always
+    restart_policy:
+      condition: on-failure
+      delay: 5s
+      max_attempts: 3
+      window: 120s
     volumes:
       - /srv/volumes/confluence/home:/var/atlassian/confluence:rw
       - /srv/volumes/confluence/logs:/opt/atlassian/confluence/logs:rw
