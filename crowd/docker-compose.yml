@@ -9,11 +9,6 @@ services:
     ports:
       - 8095:8095
     restart: always
-    restart_policy:
-      condition: on-failure
-      delay: 5s
-      max_attempts: 3
-      window: 120s
     expose:
       - 8095
     environment:

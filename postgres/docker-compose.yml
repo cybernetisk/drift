@@ -8,14 +8,6 @@ services:
     ports:
       - 5432:5432
     restart: always
-    restart_policy:
-      condition: on-failure
-      delay: 5s
-      max_attempts: 3
-      window: 120s
-    resources:
-      limits:
-        memory: 3500M
     volumes:
       - /srv/volumes/postgres:/var/lib/postgresql/data
 
