@@ -1,4 +1,4 @@
-FROM python:3-alpine
+FROM python:3.6-alpine
 MAINTAINER Henrik Steen <henrist@henrist.net>
 
 # postgresql-dev required to build psycopg2 with pip
