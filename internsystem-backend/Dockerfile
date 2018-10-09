@@ -1,8 +1,8 @@
-FROM python:3.6-alpine3.6
+FROM python:3.6-alpine3.7
 MAINTAINER Henrik Steen <henrist@henrist.net>
 
 # postgresql-dev required to build psycopg2 with pip
-RUN apk add \
+RUN apk --update add \
       ca-certificates \
       build-base \
       libxml2-dev \
