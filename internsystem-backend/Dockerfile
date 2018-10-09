@@ -1,19 +1,15 @@
-FROM python:3.6-alpine
+FROM python:3.6-alpine3.6
 MAINTAINER Henrik Steen <henrist@henrist.net>
 
 # postgresql-dev required to build psycopg2 with pip
-RUN apk --update add \
+RUN apk add \
       ca-certificates \
       build-base \
       libxml2-dev \
       libxslt-dev \
-      postgresql-dev
-
-# xmlsec is only available in the testing repo
-RUN apk add --no-cache \
-      --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ \
-      --allow-untrusted \
+      postgresql-dev \
       xmlsec-dev
+
 
 RUN mkdir -p /usr/src/app
 RUN mkdir -p /usr/src/static
