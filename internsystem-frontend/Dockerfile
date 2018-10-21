@@ -1,4 +1,4 @@
-FROM node:6
+FROM node:10
 MAINTAINER Henrik Steen <henrist@henrist.net>
 
 RUN mkdir -p /usr/src/app
