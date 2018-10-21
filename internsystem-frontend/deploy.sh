@@ -20,7 +20,8 @@ tempdir="$(mktemp -d)"
 echo "Extracting artifact and injecting environment override"
 
 pushd "$tempdir"
-tar --strip-components=1 -zxvf "$releasefile"
+tar --strip-components=1 -zxvf --no-same-owner "$releasefile"
+chmod 755 .
 popd
 
 cp -p "$env_subdir/env.js" "$tempdir/env.js"
