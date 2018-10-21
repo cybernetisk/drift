@@ -20,7 +20,7 @@ tempdir="$(mktemp -d)"
 echo "Extracting artifact and injecting environment override"
 
 pushd "$tempdir"
-tar --strip-components=1 -zxvf --no-same-owner "$releasefile"
+tar --strip-components=1 --no-same-owner -zxvf "$releasefile"
 chmod 755 .
 popd
 
