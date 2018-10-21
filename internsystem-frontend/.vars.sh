@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z "$ENV" ]; then
+if [ -z "${ENV:-}" ]; then
     >&2 echo "You must specify the environment that is to be used, e.g.:"
     >&2 echo "\$ ENV=test ./build.sh"
     exit 1
