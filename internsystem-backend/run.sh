@@ -1,6 +1,5 @@
 #!/bin/bash
-
-set -e
+set -eu
 
 . .vars.sh
 
@@ -24,12 +23,12 @@ fi
 docker run \
   --name $env_container_name \
   --net cyb \
-  -d --restart=always \
+  -d --restart=unless-stopped \
   -e "DJANGO_SECRET_KEY=$env_secretkey" \
   -e 'DJANGO_ENABLE_SAML=1' \
   -e "DJANGO_DEBUG=$env_django_debug" \
   -e "POSTGRES_NAME=$env_pgname" \
   -e "POSTGRES_PASSWORD=$env_pgpass" \
-  -v "$(pwd)/$env_subdir/settings_local.py":/usr/src/app/cyb_oko/settings_local.py \
-  -v "$(pwd)/$env_subdir/samlauth_settings.json":/usr/src/app/samlauth/prod/settings.json \
-  cyb/internsystem-backend:$env_image_tag
+  -v "$(pwd)/$env_subdir/settings_local.py":/app/cyb_oko/settings_local.py \
+  -v "$(pwd)/$env_subdir/samlauth_settings.json":/app/samlauth/prod/settings.json \
+  $DOCKERIMAGE
