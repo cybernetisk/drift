@@ -19,7 +19,6 @@ docker run \
   --rm \
   --net cyb \
   -e "DJANGO_SECRET_KEY=$env_secretkey" \
-  -e 'DJANGO_ENABLE_SAML=1' \
   -e 'DJANGO_DEBUG=1' \
   -e "POSTGRES_NAME=$env_pgname" \
   -e "POSTGRES_PASSWORD=$env_pgpass" \
