@@ -1,0 +1,8 @@
+- hosts: all
+  remote_user: core
+  tasks:
+  - name: Compress crowd data
+    archive:
+      path: /srv/volumes/{{inventory_hostname_short}}
+      dest: /home/core/backups/backup.tgz
+    become: true

@@ -1,0 +1,8 @@
+- hosts: all
+  remote_user: core
+  tasks:
+  - name: Copy backups from hosts
+    fetch:
+      src: /home/core/backups/backup.tgz
+      dest: /home/adrianh/test/{{inventory_hostname_short}}_{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}.tgz
+      flat: yes
