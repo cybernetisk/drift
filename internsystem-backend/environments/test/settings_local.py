@@ -8,9 +8,7 @@ SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 # see https://docs.djangoproject.com/en/1.7/ref/settings/#std:setting-DEBUG
 DEBUG = 'DJANGO_DEBUG' in os.environ
 
-# enable SAML if wanted
-# see setup_saml.sh
-ENABLE_SAML = 'DJANGO_ENABLE_SAML' in os.environ
+ENABLE_SAML = True
 SAML_FOLDER = os.path.join(BASE_DIR, 'samlauth', 'prod')
 
 # see https://docs.djangoproject.com/en/1.7/ref/settings/#std:setting-ALLOWED_HOSTS

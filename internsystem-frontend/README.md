@@ -1,15 +1,10 @@
-# Setup of internsystem
+# Setup of internsystem-frontend
 
-This is the Docker-setup for running https://github.com/cybernetisk/internsystem
-in production.
+This is the setup to deploy a prebuilt package of the frontend project
+https://github.com/cybernetisk/internsystem-frontend
 
-The main purpose of this Docker setup is to build static files that is served
-by nginx. There is no container that will persist for this setup.
+Travis CI builds the artifact, uploads it to a server holding this setup
+and executing `deploy.sh`.
 
-## Building static files
-
-Run `ENV=test ./update.sh` that will perform all needed operations.
-
-The build itself is stored in Docker volume `internsystem-frontend-build` or
-`internsystem-frontend-build-test` (depending on environment) that is used by
-nginx.
+This will cause the artifact to be decompressed and replace existing static
+files that nginx uses to serve clients.
