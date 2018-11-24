@@ -15,6 +15,7 @@ docker run \
     -v letsencrypt-accounts:/opt/letsencrypt.sh/accounts \
     -v okoreports-reports:/var/www/okoreports-reports \
     -v okoreports-frontend-dist:/var/www/okoreports-frontend-dist \
+    -v /root/cyb50:/tmp/cyb50 \
     -v "$(pwd)/nginx/nginx.conf":/etc/nginx/nginx.conf \
     -v "$(pwd)/nginx/okoreports.htpasswd":/etc/nginx/okoreports.htpasswd \
     -v "$(pwd)/nginx/conf.d":/etc/nginx/conf.d \

@@ -7,6 +7,7 @@ WORKDIR /usr/src/app
 RUN apk add --no-cache build-base python3-dev libffi-dev openssl-dev git
 
 COPY src/requirements.txt /usr/src/app/
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/ /usr/src/app
