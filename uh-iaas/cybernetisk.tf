@@ -68,6 +68,17 @@ resource "openstack_networking_secgroup_rule_v2" "http" {
 	security_group_id = "${openstack_networking_secgroup_v2.web.id}"
 }
 
+resource "openstack_networking_secgroup_rule_v2" "filebeat" {
+	direction         = "ingress"
+	ethertype         = "IPv4"
+	protocol          = "tcp"
+	port_range_min    = 5044
+	port_range_max    = 5044
+	remote_ip_prefix  = "0.0.0.0/0"
+	security_group_id = "${openstack_networking_secgroup_v2.web.id}"
+}
+
+
 resource "openstack_networking_secgroup_rule_v2" "ssh" {
 	direction         = "ingress"
 	ethertype         = "IPv4"
@@ -163,6 +174,23 @@ resource "openstack_compute_instance_v2" "first-crowd" {
 	user_data = "${file("coreos/cyb.ign")}"
 }
 
+# Create application server for ELK
+resource "openstack_compute_instance_v2" "first-elk" {
+	name = "core-elk"
+	image_name = "${var.coreos}"
+	flavor_name = "${data.openstack_compute_flavor_v2.large.name}"
+	network {
+		name = "${data.openstack_networking_network_v2.public.name}"
+	}
+	security_groups = [
+		"${openstack_networking_secgroup_v2.web.name}",
+		"${openstack_networking_secgroup_v2.minion.name}"
+	]
+	key_pair = "${openstack_compute_keypair_v2.cyb.name}"
+
+	user_data = "${file("coreos/cyb.ign")}"
+}
+
 # Create some database servers; we'll need too, and not much memory either
 resource "openstack_compute_instance_v2" "core-db" {
 	count = 2
@@ -209,6 +237,9 @@ output "jira_ip" {
 }
 output "crowd_ip" {
 	value = "${openstack_compute_instance_v2.first-crowd.access_ip_v4}"
+}
+output "elk_ip" {
+	value = "${openstack_compute_instance_v2.first-elk.access_ip_v4}"
 }
 output "db_ips" {
 	value = ["${openstack_compute_instance_v2.core-db.*.access_ip_v4}"]
