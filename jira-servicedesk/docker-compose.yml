@@ -19,7 +19,6 @@ services:
       - LETSENCRYPT_HOST=help.cyb.no
       - LETSENCRYPT_PORT=8080
       - LETSENCRYPT_EMAIL=x@cyb.no
-      - LETSENCRYPT_TEST=true
 
   nginx-proxy:
     container_name: nginx
