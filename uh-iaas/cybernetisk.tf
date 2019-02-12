@@ -157,6 +157,23 @@ resource "openstack_compute_instance_v2" "first-jira" {
 	user_data = "${file("coreos/cyb.ign")}"
 }
 
+# Create application server for Jira-servicedesk
+resource "openstack_compute_instance_v2" "first-jira-servicedesk" {
+	name = "core-jira-servicedesk"
+	image_name = "${var.coreos}"
+	flavor_name = "${data.openstack_compute_flavor_v2.medium.name}"
+	network {
+		name = "${data.openstack_networking_network_v2.public.name}"
+	}
+	security_groups = [
+		"${openstack_networking_secgroup_v2.web.name}",
+		"${openstack_networking_secgroup_v2.minion.name}"
+	]
+	key_pair = "${openstack_compute_keypair_v2.cyb.name}"
+
+	user_data = "${file("coreos/cyb.ign")}"
+}
+
 # Create application server for Crowd
 resource "openstack_compute_instance_v2" "first-crowd" {
 	name = "core-crowd"
@@ -234,6 +251,9 @@ output "confluence_ip" {
 }
 output "jira_ip" {
 	value = "${openstack_compute_instance_v2.first-jira.access_ip_v4}"
+}
+output "jira-servicedesk_ip" {
+	value = "${openstack_compute_instance_v2.first-jira-servicedesk.access_ip_v4}"
 }
 output "crowd_ip" {
 	value = "${openstack_compute_instance_v2.first-crowd.access_ip_v4}"

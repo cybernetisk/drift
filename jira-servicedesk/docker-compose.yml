@@ -1,0 +1,64 @@
+version: '3'
+services:
+  jira:
+    container_name: jira-servicedesk
+    image: cptactionhank/atlassian-jira-service-desk
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+    restart: always
+    volumes:
+      - /srv/volumes/jira-servicedesk:/var/atlassian/jira-servicedesk
+    environment:
+      - X_PROXY_NAME=help.cyb.no
+      - X_PROXY_PORT=443
+      - X_PROXY_SCHEME=https
+      - VIRTUAL_HOST=help.cyb.no
+      - VIRTUAL_PORT=8080
+      - LETSENCRYPT_HOST=help.cyb.no
+      - LETSENCRYPT_PORT=8080
+      - LETSENCRYPT_EMAIL=x@cyb.no
+      - LETSENCRYPT_TEST=true
+
+  nginx-proxy:
+    container_name: nginx
+    image: jwilder/nginx-proxy
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - cert-volume:/etc/nginx/certs:ro
+      - vhost-volume:/etc/nginx/vhost.d
+      - html-volume:/usr/share/nginx/html
+    environment:
+      - ENABLE_IPV6=true
+    labels:
+      - 'com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true'
+
+  nginx-companion:
+    container_name: nginx-letsencrypt
+    depends_on:
+      - nginx-proxy
+    restart: always
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - cert-volume:/etc/nginx/certs:rw
+      - vhost-volume:/etc/nginx/vhost.d
+      - html-volume:/usr/share/nginx/html
+
+networks:
+  default:
+    external:
+      name: cyb
+
+volumes:
+  cert-volume:
+  vhost-volume:
+  html-volume:
+
+
+# vim: ft=yaml ts=2 sw=2 et
