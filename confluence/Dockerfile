@@ -1,11 +1,16 @@
 FROM cptactionhank/atlassian-confluence:latest
 
-LABEL maintainer="Thor Høgås <thor at roht dot no>"
-LABEL version="0.3"
+LABEL maintainer="X-gruppa <x at cyb dot no>"
+LABEL version="0.3.1"
 
 USER root
 
 COPY container/crowd.properties /opt/atlassian/confluence/confluence/WEB-INF/classes/crowd.properties
+
+# FIX FOR SYNCRONY // adriah
+# FIXME: REMOVE WHEN PULL REQUEST IS MERGED AND BUILDING NEW IMAGE
+# https://github.com/cptactionhank/docker-atlassian-confluence/pull/79
+RUN apk add gcompat
 
 # set autowatch to false
 #   see https://jira.atlassian.com/browse/CONF-22070
