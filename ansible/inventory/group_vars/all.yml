@@ -1,0 +1,4 @@
+---
+mgmt_git_repo: https://github.com/cybernetisk/drift.git
+mgmt_git_dest: /srv/drift
+
