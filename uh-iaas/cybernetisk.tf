@@ -208,6 +208,7 @@ resource "openstack_compute_instance_v2" "first-elk" {
 	user_data = "${file("coreos/cyb.ign")}"
 }
 
+
 # Create some database servers; we'll need too, and not much memory either
 resource "openstack_compute_instance_v2" "core-db" {
 	count = 2
@@ -263,5 +264,8 @@ output "elk_ip" {
 }
 output "db_ips" {
 	value = ["${openstack_compute_instance_v2.core-db.*.access_ip_v4}"]
+}
+output "spf_ips" {
+	value = "${openstack_compute_instance_v2.core-spf.access_ip_v4}"
 }
 
