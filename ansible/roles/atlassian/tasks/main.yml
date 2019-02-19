@@ -1,0 +1,15 @@
+---
+- name: install python requiremnets for Ansible
+  pip:
+    name:
+      - requests
+      - docker
+      - docker-compose
+
+- name: execute the docker compose file for configured product
+  docker_service:
+    project_src: "{{ mgmt_git_dest }}/{{ atlassian_product }}"
+    recreate: never
+    state: present
+  when: atlassian_product is defined
+

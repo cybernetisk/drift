@@ -17,7 +17,7 @@ services:
       - LETSENCRYPT_TEST=true 
 
   nginx-proxy:
-    container_name: nginx
+    container_name: elk-nginx
     image: jwilder/nginx-proxy
     ports:
       - 80:80
@@ -35,7 +35,7 @@ services:
 
 
   nginx-companion:
-    container_name: nginx-letsencrypt
+    container_name: elk-nginx-letsencrypt
     depends_on:
       - nginx-proxy
     restart: always
@@ -47,7 +47,7 @@ services:
       - html-volume:/usr/share/nginx/html
 
   filebeat:
-    image: elastic/filebeat
+    image: elastic/filebeat:6.5.1
     restart: unless-stopped
     volumes:
       - ./filebeat.yml:/usr/share/filebeat/filebeat.yml

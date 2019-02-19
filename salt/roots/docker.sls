@@ -5,7 +5,6 @@ docker-repo:
     - gpgcheck: 1
     - gpgkey: https://download.docker.com/linux/centos/gpg
 
-
 install-docker:
   pkg.latest:
     - names:
@@ -18,4 +17,5 @@ install-docker:
 drift-repo:
   git.config_set:
     - value: git@github.com:cybrairai/drift.git
-    - repo: /root/drift
+    - repo: /srv/drift
+

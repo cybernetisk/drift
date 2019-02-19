@@ -1,0 +1,26 @@
+---
+# This will fail immediately if Python is not available, because the module 
+# will not be available
+- name: Pre-check before starting normal operations to validate usability 
+  hosts: coreos
+  tasks:
+    - name: Try to run a shell command
+      block:
+        - shell: uptime
+          changed_when: no
+      rescue:
+        - fail: 
+            msg: "CoreOS host must be bootstrapped first!"
+
+- name: Setup shared site configuration applicable to all hosts
+  hosts: all
+  roles:
+    - cyb-drift
+
+# TODO: there shouldn't be one role per thing, I think, but rather just a 
+# generic docker setup. Current method *may* work.
+- name: Setup Atlassian Docker instances
+  hosts: confluence,jira,crowd
+  roles:
+    - atlassian
+

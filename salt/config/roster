@@ -1,0 +1,14 @@
+# vim: set ft=yaml:
+
+confluence:
+  host: confluence.core.cyb.no
+  sudo: yes
+
+jira:
+  host: jira.core.cyb.no
+  sudo: yes
+
+crowd:
+  host: crowd.core.cyb.no
+  sudo: yes
+

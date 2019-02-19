@@ -1,0 +1,19 @@
+all:
+  vars:
+    ansible_ssh_private_key_file: "../../drift-hysj/ssh/id_cyb"
+  children:
+    coreos:
+      vars:
+        ansible_ssh_user: "core"
+        ansible_python_interpreter: "PATH=$PATH:/opt/bin python"
+      children:
+        confluence:
+          hosts:
+            confluence.core.cyb.no:
+        jira: 
+          hosts:
+            jira.core.cyb.no:
+        crowd: 
+          hosts:
+            crowd.core.cyb.no:
+
