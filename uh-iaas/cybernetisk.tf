@@ -119,6 +119,21 @@ resource "openstack_images_image_v2" "coreos" {
 	region = "osl"
 }
 */
+# TGPC - ASK ADRIAN
+resource "openstack_compute_instance_v2" "first-tgpc" {
+	name = "fedora-tgpc"
+	image_name = "GOLD Fedora 28"
+	flavor_name = "${data.openstack_compute_flavor_v2.large.name}"
+	network {
+		name = "${data.openstack_networking_network_v2.public.name}"
+	}
+	security_groups = [
+		"${openstack_networking_secgroup_v2.web.name}",
+		"${openstack_networking_secgroup_v2.minion.name}"
+	]
+	key_pair = "${openstack_compute_keypair_v2.cyb.name}"
+
+}
 
 /*
 All compute resources for CYB
@@ -247,6 +262,9 @@ resource "openstack_compute_instance_v2" "core-spf" {
 /*
 Outputs for magic
 */
+output "tgpc_ip" {
+	value = "${openstack_compute_instance_v2.first-tgpc.access_ip_v4}"
+}
 output "confluence_ip" {
 	value = "${openstack_compute_instance_v2.first-confluence.access_ip_v4}"
 }
