@@ -2,7 +2,7 @@ version: '3'
 services:
   crowd:
     container_name: crowd
-    image: blacklabelops/crowd
+    image: teamatldocker/crowd
     volumes:
       - /srv/volumes/crowd:/var/atlassian/crowd
       - /dev/urandom:/dev/random
