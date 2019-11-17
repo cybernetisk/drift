@@ -1,0 +1,42 @@
+version: '2'
+
+services:
+  nginx-front:
+    image: henrist/nginx-letsencrypt
+    restart: unless-stopped
+    container_name: cyb-nginx-front
+    environment:
+      LE_CONTACT_EMAIL: drift@cyb.no
+    volumes:
+      - internsystem-backend-static:/var/www/internsystem-backend-static
+      - internsystem-backend-static-test:/var/www/internsystem-backend-static-test
+      - internsystem-frontend-dist:/var/www/internsystem-frontend-dist
+      - internsystem-frontend-dist-test:/var/www/internsystem-frontend-dist-test
+      - internsystem-frontend-dist-test-frontend:/var/www/internsystem-frontend-dist-test-frontend
+      - letsencrypt-certs:/opt/letsencrypt.sh/certs
+      - letsencrypt-accounts:/opt/letsencrypt.sh/accounts
+      - okoreports-reports:/var/www/okoreports-reports
+      - okoreports-frontend-dist:/var/www/okoreports-frontend-dist
+      - /root/cyb50:/tmp/cyb50
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/okoreports.htpasswd:/etc/nginx/okoreports.htpasswd
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+      - "443:443"
+
+networks:
+  default:
+    external:
+      name: cyb
+
+volumes:
+  internsystem-backend-static:
+  internsystem-backend-static-test:
+  internsystem-frontend-dist:
+  internsystem-frontend-dist-test:
+  internsystem-frontend-dist-test-frontend:
+  letsencrypt-certs:
+  letsencrypt-accounts:
+  okoreports-reports:
+  okoreports-frontend-dist:
