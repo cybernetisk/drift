@@ -1,0 +1,7 @@
+- hosts: all
+  remote_user: core
+  tasks:
+          - name: Delete unfetched backups
+            file:
+                    path: /home/core/backups/backup.tgz
+                    state: absent
