@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
   nginx-front:
@@ -32,11 +32,20 @@ networks:
 
 volumes:
   internsystem-backend-static:
+    external: true
   internsystem-backend-static-test:
+    external: true
   internsystem-frontend-dist:
+    external: true
   internsystem-frontend-dist-test:
+    external: true
   internsystem-frontend-dist-test-frontend:
+    external: true
   letsencrypt-certs:
+    external: true
   letsencrypt-accounts:
+    external: true
   okoreports-reports:
+    external: true
   okoreports-frontend-dist:
+    external: true
