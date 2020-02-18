@@ -1,0 +1,8 @@
+variable "coreos" {
+	default     = "Container-Linux"
+	description = "Name for CoreOS container image"
+}
+variable "public_key" {
+	default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC/Lab1LgjwUVbXDUCQctUa1/7r7mLRwaTsWMmsvKrc9+CKPmgpR6d2x9z4/vVCFbRs2ZECsQPdNVTFr/kKLFcEFy3ITSteOFXb1hX1csD1Ktcu+Bh4PdSe/d0tDudJPKx8VimcXrd/o90A+mn/u+S+O2xMyx5YI2179hTqH/6mkUs/AEtg6C9RaMH1QNrZIQAbcnrinCnRz+mfH8+m/ZawMTvOQ2pUk7tIiTk1xzAgojzmSDM+2leqNbM97LImX/k7ADOiqlvMe3+q+nn8UQe1+qEAMeIWiwTDaWAuZpx71f4TmEbVlx1ZJ1XCzulDQgQbabT2J02FtEr/zr4apbWl3PMyMrxL5u30qqo7Dx6BcZo7Ekjowo5awAXtnz83XtHGvyfXRvVb3l+6d1RpnzDS5ecLIpX/ATrtUA+HBWYch+RXi0Wkc+ppUdvnVsCyal5blHvPathpWbwcKwX3jVqayoOyGcpCNOduAXxDJorAvdgUmFtqYclfhpAdjkegyaCsZ3uFxYphXW6YAg72qCo57NgKa4bU+SzVSUfyoqktHUqyD/PnYMKcUlAx6vUXjARDPeGL/7fyJ5+63mzRMit7XrdsKv7Ps1U+c7HlNTrvTVfyD6Tw3NzEYbSRTCMNaCGUiIdjFeRebw6tTGPHctLXpLVGif8wXFBr+7uYfiyLFw== drift@cyb.no"
+	type = string
+}
