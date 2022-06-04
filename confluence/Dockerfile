@@ -7,11 +7,6 @@ USER root
 
 COPY container/crowd.properties /opt/atlassian/confluence/confluence/WEB-INF/classes/crowd.properties
 
-# FIX FOR SYNCRONY // adriah
-# FIXME: REMOVE WHEN PULL REQUEST IS MERGED AND BUILDING NEW IMAGE
-# https://github.com/cptactionhank/docker-atlassian-confluence/pull/79
-RUN apk add gcompat
-
 # set autowatch to false
 #   see https://jira.atlassian.com/browse/CONF-22070
 # also set server settings to match our use
