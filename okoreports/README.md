@@ -5,10 +5,8 @@ details.
 
 ## Setup and updating
 
-Make sure `settings.py` is set up in this directory. See the link above for
-details and template.
-
-Start the services:
+The file `.env` must exist having the required envs defined.
+See link above for more details.
 
 ```
 docker-compose pull

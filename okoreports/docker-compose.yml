@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     volumes:
       - okoreports-reports-cyb:/var/okoreports/reports
-      - ./settings.py:/usr/src/tripletex/settings_local.py
+    env_file: .env
 
   cyb-okoreports-frontend:
     image: cybernetisk/okoreports-frontend
