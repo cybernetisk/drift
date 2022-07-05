@@ -6,6 +6,7 @@ services:
     restart: unless-stopped
     volumes:
       - okoreports-reports-cyb:/var/okoreports/reports
+      - ./credentials.json:/credentials.json
     env_file: .env
 
   cyb-okoreports-frontend:
