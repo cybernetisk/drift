@@ -1,4 +1,4 @@
-sersion: '2'
+version: '2'
 services:
   postgres:
     container_name: cyb-internsystem-db
