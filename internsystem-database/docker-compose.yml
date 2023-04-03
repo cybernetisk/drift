@@ -1,0 +1,21 @@
+sersion: '2'
+services:
+  postgres:
+    container_name: cyb-internsystem-db
+    image: postgres:15-alpine
+    restart: unless-stopped
+    # POSTGRES_PASSWORD is in this file
+    env_file: .env
+    environment:
+      POSTGRES_USER: internsystem
+      POSTGRES_DB: internsystem
+    volumes:
+      - internsystem-db:/var/lib/postgresql/data
+
+networks:
+  default:
+    external:
+      name: cyb
+
+volumes:
+  internsystem-db:
