@@ -29,11 +29,11 @@ CACHES = {
 # example for postgres configuration
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ['POSTGRES_NAME'],
         'USER': 'internsystem',
         'PASSWORD': os.environ['POSTGRES_PASSWORD'],
-        'HOST': 'cyb-postgres',
+        'HOST': 'cyb-internsystem-db',
         'PORT': '5432',
     }
 }
